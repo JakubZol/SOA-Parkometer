@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Parkometr</title>
+    <style type="text/css">
+
+        body{
+            text-align: center;
+        }
+
+        #form{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .form-panel{
+            width: 30%;
+            box-sizing: border-box;
+        }
+
+        .submit-button{
+            width: 250px;
+            height: 50px;
+            box-sizing: border-box;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h1>Buy parking ticket</h1>
+    <h:form id="form">
+        <h:panelGrid class="form-panel">
+            <h4>Select Zone:</h4>
+            <h:selectOneMenu value="#{parkometer.currentZone}" id="zones">
+                <f:selectItems var="zone" value="#{parkometer.zonesList}" itemLabel="#{zone}" itemValue="#{zone}"/>
+            </h:selectOneMenu>
+            <h:commandButton value="Wybierz strefę">
+                <f:ajax execute="zones" render="lots"/>
+            </h:commandButton>
+        </h:panelGrid>
+
+        <h:panelGrid class="form-panel">
+            <h4>Select Parking Lot:</h4>
+            <h:selectOneMenu value="#{parkometer.currentLot}" id="lots">
+                <f:selectItems var="lot" value="#{parkometer.lots}" itemLabel="#{lot}" itemValue="#{lot}"/>
+            </h:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid class="form-panel">
+            <h4>Chose ticket</h4>
+            <h:selectOneMenu value="#{parkometer.expiryTime}" id="time">
+                <f:selectItem itemLabel="30 minutes" itemValue="30"/>
+                <f:selectItem itemLabel="45 minutes" itemValue="45"/>
+                <f:selectItem itemLabel="60 minutes" itemValue="60"/>
+                <f:selectItem itemLabel="120 minutes" itemValue="120"/>
+            </h:selectOneMenu>
+        </h:panelGrid>
+
+        <h:commandButton class="submit-button" value="Buy ticket"/>
+    </h:form>
+
+</h:body>
+</html>

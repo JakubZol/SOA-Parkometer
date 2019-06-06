@@ -30,8 +30,8 @@
     <h:form>
         <h:panelGrid class="selection-panel">
             <h3>Select Zone:</h3>
-            <h:selectOneMenu value="#{parkometer.currentZone}" id="zones">
-                <f:selectItems var="zone" value="#{parkometer.zonesList}" itemLabel="#{zone}" itemValue="#{zone}"/>
+            <h:selectOneMenu value="#{carpark.currentZone}" id="zones">
+                <f:selectItems var="zone" value="#{carpark.zonesList}" itemLabel="#{zone}" itemValue="#{zone}"/>
             </h:selectOneMenu>
             <h:commandButton value="Wybierz strefę">
                 <f:ajax execute="zones" render="lots"/>
@@ -40,15 +40,15 @@
 
         <h:panelGrid class="selection-panel">
             <h3>Select Parking Lot:</h3>
-            <h:selectOneMenu value="#{parkometer.currentLot}" id="lots">
-                <f:selectItems var="lot" value="#{parkometer.lots}" itemLabel="#{lot}" itemValue="#{lot}"/>
+            <h:selectOneMenu value="#{carpark.currentLot}" id="lots">
+                <f:selectItems var="lot" value="#{carpark.lots}" itemLabel="#{lot}" itemValue="#{lot}"/>
             </h:selectOneMenu>
             <h:commandButton value="Wybierz miejsce">
                 <f:ajax execute="lots" render="lot"/>
             </h:commandButton>
         </h:panelGrid>
         <h:panelGrid class="summary">
-            <h:outputText id="lot" value="#{parkometer.message}"/>
+            <h:outputText id="lot" value="#{carpark.message}"/>
             <h:commandButton value="Zatwierdź wybór"/>
         </h:panelGrid>
     </h:form>

@@ -1,4 +1,4 @@
-package pl.soa.parkometer.parkometer_mock;
+package pl.soa.parkometer.carpark_mock;
 
 import java.util.HashMap;
 import java.util.Map;

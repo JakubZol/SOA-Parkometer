@@ -1,13 +1,13 @@
-package pl.soa.parkometer.parkometer_mock;
+package pl.soa.parkometer.carpark_mock;
 
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.util.*;
 
-@ManagedBean(name = "parkometer", eager = true)
+@ManagedBean(name = "carpark", eager = true)
 @ApplicationScoped
-public class Parkometer {
+public class CarParkMock {
 
     private Map<String, Vector<String>> zones = ZonesInitializer.initializeZones();
     private Set<String> zonesList = zones.keySet();
