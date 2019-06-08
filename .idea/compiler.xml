@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="carpark" />
-        <module name="mainapp" />
+        <module name="database" />
         <module name="parkometer" />
       </profile>
     </annotationProcessing>
