@@ -1,9 +1,10 @@
 package pl.soa.parkometer.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Worker {
+public class Worker implements Serializable {
     private int workerId;
     private String login;
     private String passwd;

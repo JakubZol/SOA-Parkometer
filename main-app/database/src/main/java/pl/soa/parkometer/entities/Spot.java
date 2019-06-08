@@ -1,11 +1,13 @@
 package pl.soa.parkometer.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-public class Spot {
+@NamedQuery(query = "Select s from Spot s where vacancy = false", name = "get occupied spots")
+public class Spot implements Serializable {
     private int spotId;
     private String spotName;
     private boolean vacancy;

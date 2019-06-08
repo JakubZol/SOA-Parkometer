@@ -1,10 +1,11 @@
 package pl.soa.parkometer.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-public class Ticket {
+public class Ticket implements Serializable {
     private int ticketId;
     private Timestamp purchaseDate;
     private Timestamp expiryDate;

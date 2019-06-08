@@ -1,11 +1,12 @@
 package pl.soa.parkometer.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "ticket_type", schema = "public", catalog = "parkometer")
-public class TicketType {
+public class TicketType implements Serializable {
     private int typeId;
     private String time;
     private int price;

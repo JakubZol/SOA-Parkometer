@@ -1,10 +1,11 @@
 package pl.soa.parkometer.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Role {
+public class Role implements Serializable {
     private int roleId;
     private String roleName;
     private List<Worker> workers;
