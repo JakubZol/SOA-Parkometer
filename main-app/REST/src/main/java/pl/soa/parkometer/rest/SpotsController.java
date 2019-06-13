@@ -1,12 +1,13 @@
 package pl.soa.parkometer.rest;
 
 
+import pl.soa.parkometer.ejb.database.SpotManagerInterface;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
 
 @Path("/")
@@ -14,8 +15,9 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class SpotsController {
 
-    /*@EJB //(lookup = "java:global/parking-ejb-impl-1.0/ParkingSpotsStorage")
-*/
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/SpotManager")
+    SpotManagerInterface spotManager;
+
 
 
 

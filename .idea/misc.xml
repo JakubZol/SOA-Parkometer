@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb" />
+    <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb-impl" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
