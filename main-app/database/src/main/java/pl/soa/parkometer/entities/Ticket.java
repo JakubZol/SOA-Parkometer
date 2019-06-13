@@ -65,7 +65,7 @@ public class Ticket implements Serializable {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
     public TicketType getType() {
         return type;
@@ -75,7 +75,7 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     public Spot getSpot() {
         return spot;

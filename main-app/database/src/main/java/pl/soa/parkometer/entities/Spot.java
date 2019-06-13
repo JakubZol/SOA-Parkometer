@@ -89,7 +89,7 @@ public class Spot implements Serializable {
         this.tickets = tickets;
     }
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "zone_id", referencedColumnName = "zone_id", nullable = false)
     public Zone getZone() {
         return zone;

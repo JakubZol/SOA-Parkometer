@@ -24,7 +24,7 @@ public class SpotsController {
     @GET
     @Path("spots")
     public Response getSpots() {
-        return Response.status(200).entity("TO DO").build();
+        return Response.status(200).entity(spotManager.getAllSpots()).build();
     }
 
 }
