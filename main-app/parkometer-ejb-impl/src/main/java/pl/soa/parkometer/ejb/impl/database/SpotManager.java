@@ -1,14 +1,17 @@
-package pl.soa.parkometer.managers;
+package pl.soa.parkometer.ejb.impl.database;
 
 import pl.soa.parkometer.database.DatabaseService;
+import pl.soa.parkometer.ejb.database.SpotManagerInterface;
 import pl.soa.parkometer.entities.Spot;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class SpotManager {
+@Stateless
+public class SpotManager implements SpotManagerInterface {
 
     private final DatabaseService databaseService = new DatabaseService("SOA-Parkometer");
     private EntityManager entityManager = databaseService.getEntityManager();
@@ -29,9 +32,7 @@ public class SpotManager {
 
     }
 
-    public void UpdateSpots(){
-        System.out.println("TO DO!");
-    }
+    public void updateSpot(Spot s){ System.out.println("TO DO!"); }
 
     public void deleteSpot(int id){
         entityManager.getTransaction().begin();

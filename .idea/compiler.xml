@@ -9,6 +9,9 @@
         <module name="carpark" />
         <module name="database" />
         <module name="parkometer" />
+        <module name="parkometerejb" />
+        <module name="parkometerejbimpl" />
+        <module name="REST" />
       </profile>
     </annotationProcessing>
   </component>
