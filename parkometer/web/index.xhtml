@@ -21,7 +21,7 @@
         }
 
         .form-panel{
-            width: 30%;
+            width: 40%;
             box-sizing: border-box;
         }
 
@@ -35,20 +35,11 @@
 <h:body>
     <h1>Buy parking ticket</h1>
     <h:form id="form">
-        <h:panelGrid class="form-panel">
-            <h4>Select Zone:</h4>
-            <h:selectOneMenu value="#{parkometer.currentZone}" id="zones">
-                <f:selectItems var="zone" value="#{parkometer.zonesList}" itemLabel="#{zone}" itemValue="#{zone}"/>
-            </h:selectOneMenu>
-            <h:commandButton value="Wybierz strefę">
-                <f:ajax execute="zones" render="lots"/>
-            </h:commandButton>
-        </h:panelGrid>
 
         <h:panelGrid class="form-panel">
             <h4>Select Parking Lot:</h4>
-            <h:selectOneMenu value="#{parkometer.currentLot}" id="lots">
-                <f:selectItems var="lot" value="#{parkometer.lots}" itemLabel="#{lot}" itemValue="#{lot}"/>
+            <h:selectOneMenu value="#{parkometer.currentSpot}" id="lots">
+                <f:selectItems var="spot" value="#{parkometer.spots}" itemLabel="#{spot.spotName} | #{spot.zone.zoneName} | " itemValue="#{spot}"/>
             </h:selectOneMenu>
         </h:panelGrid>
 
@@ -61,11 +52,10 @@
                 <f:selectItem itemLabel="120 minutes" itemValue="120"/>
             </h:selectOneMenu>
         </h:panelGrid>
-
-        <h:commandButton class="submit-button" value="Buy ticket"/>
+        <h:panelGrid class="form-panel">
+            <h:commandButton class="submit-button" value="Buy ticket"/>
+        </h:panelGrid>
     </h:form>
-
-    <h:outputText value="#{parkometer.restMessage}"/>
 
 </h:body>
 </html>

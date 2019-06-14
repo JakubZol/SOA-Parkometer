@@ -5,10 +5,7 @@ import pl.soa.parkometer.ejb.database.SpotManagerInterface;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("/")
@@ -21,15 +18,9 @@ public class SpotsController {
 
 
     @GET
-    @Path("spots/{id}")
-    public Response getSpotById(@PathParam("id") int id) {
-        return Response.status(200).entity(spotManager.getSpotById(id)).build();
-    }
-
-    @GET
     @Path("spots")
-    public Response getAllSpots(){
-        return Response.status(200).entity(spotManager.getAllSpots()).build();
+    public Response getSpots(){
+        return Response.status(200).entity(spotManager.getOccupiedSpots()).build();
     }
 
 }

@@ -15,96 +15,28 @@ import java.util.*;
 @ApplicationScoped
 public class ParkometerMock {
 
-    private Map<String, Vector<String>> zones = ParkometerMock.generateZones();
-    private Set<String> zonesList = zones.keySet();
-    private String currentZone = zonesList.iterator().next();
-    private String currentLot = zones.get(currentZone).firstElement();
+    private Spot currentSpot = this.getSpots().get(0);
     private Integer expiryTime;
-    //private List<Spot> spots = this.getSpots();
-    private String restMessage = this.getMessage();
 
-    public String getMessage(){
+    public List<Spot> getSpots(){
         Client client = ClientBuilder.newClient();
-        Response response = client.target("http://localhost:8080/REST_war/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
+        Response response = client.target("http://localhost:8080/REST-1.0-SNAPSHOT/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
         if (response.getStatus()!= 200){
-            throw new RuntimeException("Error");
+            LinkedList<Spot> list = new LinkedList<>();
+            Spot s = new Spot();
+            s.setSpotName("ERROR " + response.getStatus());
+            list.add(s);
+            return list;
         }
-        String message = response.readEntity(new GenericType<String>(){});
-        return message;
+        return response.readEntity(new GenericType<List<Spot>>(){});
     }
 
-    public String getRestMessage() {
-        return restMessage;
+    public Spot getCurrentSpot() {
+        return currentSpot;
     }
 
-    public void setRestMessage(String restMessage) {
-        this.restMessage = restMessage;
-    }
-
-    /*
-    public List<Spot> getSpots() {
-        Client client = ClientBuilder.newClient();
-        Response response = client.target("http://localhost:8080/REST_war/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
-        if (response.getStatus()!= 200){
-            throw new RuntimeException("Error");
-        }
-        List<Spot> spots = response.readEntity(new GenericType<List<Spot>>(){});
-        System.out.println(spots.get(0));
-        return spots;
-    }*/
-
-
-    private static Map<String, Vector<String>> generateZones(){
-        Map<String, Vector<String>> zones = new HashMap<String, Vector<String>>();
-        String zone;
-
-        for(int x = 1; x < 10; x++){
-            Vector<String> lots = new Vector<String>();
-            zone = "Zone" + x;
-            for(int j = 1; j < 10; j++){
-                lots.add("Lot" + x + j);
-            }
-            zones.put(zone, lots);
-        }
-
-
-        return zones;
-    }
-
-    public Vector<String> getLots(){
-        return this.zones.get(currentZone);
-    }
-
-    public Map<String, Vector<String>> getZones() {
-        return zones;
-    }
-
-    public void setZones(Map<String, Vector<String>> zones) {
-        this.zones = zones;
-    }
-
-    public Set<String> getZonesList() {
-        return zonesList;
-    }
-
-    public void setZonesList(Set<String> zonesList) {
-        this.zonesList = zonesList;
-    }
-
-    public String getCurrentZone() {
-        return currentZone;
-    }
-
-    public void setCurrentZone(String currentZone) {
-        this.currentZone = currentZone;
-    }
-
-    public String getCurrentLot() {
-        return currentLot;
-    }
-
-    public void setCurrentLot(String currentLot) {
-        this.currentLot = currentLot;
+    public void setCurrentSpot(Spot spot) {
+        this.currentSpot = spot;
     }
 
     public Integer getExpiryTime() {

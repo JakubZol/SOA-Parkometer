@@ -28,6 +28,11 @@
             <artifactId>resteasy-jaxrs</artifactId>
             <version>3.6.3.Final</version>
         </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
     <packaging>war</packaging>

@@ -6,12 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ApplicationPath("/")
-public class SpotsRestApplication extends Application {
+public class RestApplication extends Application {
 
     private Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    public SpotsRestApplication() {
+    public RestApplication() {
         classes.add(SpotsController.class);
+        classes.add(TicketsController.class);
     }
 
     @Override
