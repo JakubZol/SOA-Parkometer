@@ -3,6 +3,7 @@ drop table zone cascade;
 drop table ticket cascade;
 drop table worker cascade;
 drop table role cascade;
+drop table ticket_type cascade;
 
 begin;
 
@@ -18,7 +19,7 @@ create table role(
 
 create table ticket_type(
 	type_id SERIAL PRIMARY KEY,
-	time interval not null,
+	time integer not null,
 	price integer not null
 );
 
@@ -55,11 +56,11 @@ insert into role (role_id, role_name) values
 (default, 'admin');
 
 insert into ticket_type (type_id, time, price) values
-(default, '1 hour', 3),
-(default, '2 hours', 5),
-(default, '30 minutes', 2),
-(default, '1 day', 25),
-(default, '2 days', 40);
+(default, 60, 3),
+(default, 120, 5),
+(default, 30, 2),
+(default, 1440, 25),
+(default, 2880, 40);
 
 insert into zone (zone_id, zone_name) values
 (default, 'Zone 1'),

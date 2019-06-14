@@ -3,6 +3,7 @@ package pl.soa.parkometer.ejb.impl.database;
 import pl.soa.parkometer.database.DatabaseService;
 import pl.soa.parkometer.ejb.database.TicketManagerInterface;
 import pl.soa.parkometer.entities.Ticket;
+import pl.soa.parkometer.entities.TicketType;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,5 +50,10 @@ public class TicketManager implements TicketManagerInterface {
             System.out.println(e.toString());
             entityManager.getTransaction().rollback();
         }
+    }
+
+    public List<TicketType> getTicketTypes(){
+        TypedQuery<TicketType> typedQuery = entityManager.createQuery("select tt from  TicketType tt", TicketType.class);
+        return typedQuery.getResultList();
     }
 }

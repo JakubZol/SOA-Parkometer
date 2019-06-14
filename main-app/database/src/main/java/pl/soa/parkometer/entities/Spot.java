@@ -26,6 +26,7 @@ public class Spot implements Serializable {
     @Id
     @Column(name = "spot_id", nullable = false)
     @XmlAttribute(name = "spotId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getSpotId() {
         return spotId;
     }

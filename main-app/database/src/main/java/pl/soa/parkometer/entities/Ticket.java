@@ -1,6 +1,7 @@
 package pl.soa.parkometer.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "ticket")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Ticket implements Serializable {
     private int ticketId;
     private Timestamp purchaseDate;
@@ -21,6 +23,7 @@ public class Ticket implements Serializable {
     private Spot spot;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticket_id", nullable = false)
     @XmlAttribute(name = "ticketId")
     public int getTicketId() {
@@ -76,7 +79,7 @@ public class Ticket implements Serializable {
         return result;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
     @XmlAttribute(name = "ticketType")
@@ -88,7 +91,7 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     @XmlAttribute(name = "spot")

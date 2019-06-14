@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "ticket_type", schema = "public", catalog = "parkometer")
 public class TicketType implements Serializable {
     private int typeId;
-    private String time;
+    private Integer time;
     private int price;
     private List<Ticket> tickets;
 
@@ -34,11 +34,11 @@ public class TicketType implements Serializable {
     @Basic
     @Column(name = "time", nullable = false)
     @XmlAttribute(name = "time")
-    public String getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 
