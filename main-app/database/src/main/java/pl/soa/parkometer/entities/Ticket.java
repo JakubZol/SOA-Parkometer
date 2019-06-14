@@ -1,10 +1,18 @@
 package pl.soa.parkometer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "ticket")
 public class Ticket implements Serializable {
     private int ticketId;
     private Timestamp purchaseDate;
@@ -14,6 +22,7 @@ public class Ticket implements Serializable {
 
     @Id
     @Column(name = "ticket_id", nullable = false)
+    @XmlAttribute(name = "ticketId")
     public int getTicketId() {
         return ticketId;
     }
@@ -24,6 +33,7 @@ public class Ticket implements Serializable {
 
     @Basic
     @Column(name = "purchase_date", nullable = false)
+    @XmlAttribute(name = "purchaseDate")
     public Timestamp getPurchaseDate() {
         return purchaseDate;
     }
@@ -34,6 +44,7 @@ public class Ticket implements Serializable {
 
     @Basic
     @Column(name = "expiry_date", nullable = false)
+    @XmlAttribute(name = "expiryDate")
     public Timestamp getExpiryDate() {
         return expiryDate;
     }
@@ -65,8 +76,10 @@ public class Ticket implements Serializable {
         return result;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    @XmlAttribute(name = "ticketType")
     public TicketType getType() {
         return type;
     }
@@ -75,8 +88,10 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
+    @XmlAttribute(name = "spot")
     public Spot getSpot() {
         return spot;
     }

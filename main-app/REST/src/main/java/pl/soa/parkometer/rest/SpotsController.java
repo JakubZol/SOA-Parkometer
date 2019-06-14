@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
@@ -19,11 +20,15 @@ public class SpotsController {
     SpotManagerInterface spotManager;
 
 
-
+    @GET
+    @Path("spots/{id}")
+    public Response getSpotById(@PathParam("id") int id) {
+        return Response.status(200).entity(spotManager.getSpotById(id)).build();
+    }
 
     @GET
     @Path("spots")
-    public Response getSpots() {
+    public Response getAllSpots(){
         return Response.status(200).entity(spotManager.getAllSpots()).build();
     }
 

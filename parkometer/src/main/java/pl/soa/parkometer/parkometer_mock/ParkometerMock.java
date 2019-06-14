@@ -20,9 +20,28 @@ public class ParkometerMock {
     private String currentZone = zonesList.iterator().next();
     private String currentLot = zones.get(currentZone).firstElement();
     private Integer expiryTime;
-    private List<Spot> spots = this.getSpots();
+    //private List<Spot> spots = this.getSpots();
+    private String restMessage = this.getMessage();
 
+    public String getMessage(){
+        Client client = ClientBuilder.newClient();
+        Response response = client.target("http://localhost:8080/REST_war/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
+        if (response.getStatus()!= 200){
+            throw new RuntimeException("Error");
+        }
+        String message = response.readEntity(new GenericType<String>(){});
+        return message;
+    }
 
+    public String getRestMessage() {
+        return restMessage;
+    }
+
+    public void setRestMessage(String restMessage) {
+        this.restMessage = restMessage;
+    }
+
+    /*
     public List<Spot> getSpots() {
         Client client = ClientBuilder.newClient();
         Response response = client.target("http://localhost:8080/REST_war/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
@@ -32,7 +51,7 @@ public class ParkometerMock {
         List<Spot> spots = response.readEntity(new GenericType<List<Spot>>(){});
         System.out.println(spots.get(0));
         return spots;
-    }
+    }*/
 
 
     private static Map<String, Vector<String>> generateZones(){

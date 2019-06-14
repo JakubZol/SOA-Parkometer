@@ -6,12 +6,19 @@
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb-impl" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/REST" />
+    <file type="web" url="file://$PROJECT_DIR$/main-app/SOAP" />
+    <file type="web" url="file://$PROJECT_DIR$/parkometer" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/main-app/soap/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">

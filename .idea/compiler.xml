@@ -12,6 +12,7 @@
         <module name="parkometerejb" />
         <module name="parkometerejbimpl" />
         <module name="REST" />
+        <module name="SOAP" />
       </profile>
     </annotationProcessing>
   </component>

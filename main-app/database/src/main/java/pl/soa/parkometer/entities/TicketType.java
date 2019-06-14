@@ -1,10 +1,18 @@
 package pl.soa.parkometer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "ticketType")
 @Table(name = "ticket_type", schema = "public", catalog = "parkometer")
 public class TicketType implements Serializable {
     private int typeId;
@@ -14,6 +22,7 @@ public class TicketType implements Serializable {
 
     @Id
     @Column(name = "type_id", nullable = false)
+    @XmlAttribute(name = "typeId")
     public int getTypeId() {
         return typeId;
     }
@@ -24,6 +33,7 @@ public class TicketType implements Serializable {
 
     @Basic
     @Column(name = "time", nullable = false)
+    @XmlAttribute(name = "time")
     public String getTime() {
         return time;
     }
@@ -34,6 +44,7 @@ public class TicketType implements Serializable {
 
     @Basic
     @Column(name = "price", nullable = false)
+    @XmlAttribute(name = "price")
     public int getPrice() {
         return price;
     }
@@ -64,7 +75,9 @@ public class TicketType implements Serializable {
         return result;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "type")
+    @XmlAttribute(name = "tickets")
     public List<Ticket> getTickets() {
         return tickets;
     }

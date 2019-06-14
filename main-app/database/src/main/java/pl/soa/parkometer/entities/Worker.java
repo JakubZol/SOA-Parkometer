@@ -1,9 +1,17 @@
 package pl.soa.parkometer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "worker")
 public class Worker implements Serializable {
     private int workerId;
     private String login;
@@ -15,6 +23,7 @@ public class Worker implements Serializable {
 
     @Id
     @Column(name = "worker_id", nullable = false)
+    @XmlAttribute(name = "workerId")
     public int getWorkerId() {
         return workerId;
     }
@@ -25,6 +34,7 @@ public class Worker implements Serializable {
 
     @Basic
     @Column(name = "login", nullable = false, length = 30)
+    @XmlAttribute(name = "login")
     public String getLogin() {
         return login;
     }
@@ -35,6 +45,7 @@ public class Worker implements Serializable {
 
     @Basic
     @Column(name = "passwd", nullable = false, length = 30)
+    @XmlAttribute(name = "passwd")
     public String getPasswd() {
         return passwd;
     }
@@ -45,6 +56,7 @@ public class Worker implements Serializable {
 
     @Basic
     @Column(name = "name", nullable = false, length = 30)
+    @XmlAttribute(name = "name")
     public String getName() {
         return name;
     }
@@ -55,6 +67,7 @@ public class Worker implements Serializable {
 
     @Basic
     @Column(name = "surname", nullable = false, length = 30)
+    @XmlAttribute(name = "surname")
     public String getSurname() {
         return surname;
     }
@@ -89,8 +102,10 @@ public class Worker implements Serializable {
         return result;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
+    @XmlAttribute(name = "role")
     public Role getRole() {
         return role;
     }
@@ -99,8 +114,10 @@ public class Worker implements Serializable {
         this.role = role;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "zone_id", referencedColumnName = "zone_id")
+    @XmlAttribute(name = "zone")
     public Zone getZone() {
         return zone;
     }

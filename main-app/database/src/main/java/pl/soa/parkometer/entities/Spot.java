@@ -1,11 +1,19 @@
 package pl.soa.parkometer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "spot")
 @NamedQuery(query = "Select s from Spot s where vacancy = false", name = "get occupied spots")
 public class Spot implements Serializable {
     private int spotId;
@@ -17,6 +25,7 @@ public class Spot implements Serializable {
 
     @Id
     @Column(name = "spot_id", nullable = false)
+    @XmlAttribute(name = "spotId")
     public int getSpotId() {
         return spotId;
     }
@@ -27,6 +36,7 @@ public class Spot implements Serializable {
 
     @Basic
     @Column(name = "spot_name", nullable = false, length = 10)
+    @XmlAttribute(name = "spotName")
     public String getSpotName() {
         return spotName;
     }
@@ -37,6 +47,7 @@ public class Spot implements Serializable {
 
     @Basic
     @Column(name = "vacancy", nullable = false)
+    @XmlAttribute(name = "isVacancy")
     public boolean isVacancy() {
         return vacancy;
     }
@@ -47,6 +58,7 @@ public class Spot implements Serializable {
 
     @Basic
     @Column(name = "occupation_date", nullable = true)
+    @XmlAttribute(name = "occupationDate")
     public Timestamp getOccupationDate() {
         return occupationDate;
     }
@@ -80,7 +92,9 @@ public class Spot implements Serializable {
         return result;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "spot")
+    @XmlAttribute(name = "tickets")
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -89,8 +103,10 @@ public class Spot implements Serializable {
         this.tickets = tickets;
     }
 
-    @ManyToOne()
+    //@JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "zone_id", referencedColumnName = "zone_id", nullable = false)
+    @XmlAttribute(name = "zone")
     public Zone getZone() {
         return zone;
     }
