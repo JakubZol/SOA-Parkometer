@@ -4,8 +4,9 @@ import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.TicketType;
 import pl.soa.parkometer.parkometer_mock.data.DataFetcher;
 
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.view.ViewScoped;
 
 import java.util.List;
 import java.util.stream.Collectors;

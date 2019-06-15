@@ -11,7 +11,6 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class DataFetcher {
         Response response = client.target("http://localhost:8080/REST-1.0-SNAPSHOT/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
 
         if (response.getStatus()!= 200){
-            return new LinkedList<>();
+            return new LinkedList<Spot>();
         }
 
         return response.readEntity(new GenericType<List<Spot>>(){});
@@ -33,7 +32,7 @@ public class DataFetcher {
         Response response = client.target("http://localhost:8080/REST-1.0-SNAPSHOT/tickets").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
 
         if (response.getStatus()!= 200){
-            return new LinkedList<>();
+            return new LinkedList<TicketType>();
         }
 
         return response.readEntity(new GenericType<List<TicketType>>(){});

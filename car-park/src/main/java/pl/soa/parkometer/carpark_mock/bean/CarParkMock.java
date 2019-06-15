@@ -1,5 +1,7 @@
-package pl.soa.parkometer.carpark_mock;
+package pl.soa.parkometer.carpark_mock.bean;
 
+
+import pl.soa.parkometer.carpark_mock.ZonesInitializer;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;

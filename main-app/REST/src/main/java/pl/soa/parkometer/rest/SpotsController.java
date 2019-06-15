@@ -1,6 +1,7 @@
 package pl.soa.parkometer.rest;
 
 
+import pl.soa.parkometer.ejb.core.ParkingStateControllerInterface;
 import pl.soa.parkometer.ejb.database.SpotManagerInterface;
 
 import javax.ejb.EJB;
