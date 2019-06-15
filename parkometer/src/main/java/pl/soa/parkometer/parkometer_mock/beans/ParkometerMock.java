@@ -6,7 +6,6 @@ import pl.soa.parkometer.parkometer_mock.data.DataFetcher;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +17,8 @@ public class ParkometerMock {
 
     private List<Spot> spots = DataFetcher.getSpots();
     private List<TicketType> ticketTypes = DataFetcher.getTicketTypes();
-    private Integer currentSpotId = this.spots.size() > 0 ? this.spots.get(0).getSpotId() : null;
-    private Integer currentTypeId = this.ticketTypes.size() > 0 ? this.ticketTypes.get(0).getTypeId() : null;
+    private int currentSpotId;
+    private int currentTypeId;
 
     public List<Spot> getSpots(){
         return this.spots;
@@ -29,26 +28,43 @@ public class ParkometerMock {
         return ticketTypes;
     }
 
+    public String transformTime(int minutes){
+        if(minutes >= 1440){
+            String rest = minutes % (24 * 60) == 0 ? "" : minutes % (24 * 60) + "minute(s)";
+            return Math.floor(minutes / (24 * 60)) + " day(s)";
+        }
+        else if(minutes >= 60){
+            String rest = minutes % 60 == 0 ? "" : minutes % 60 + "minute(s)";
+            return Math.floor(minutes / 60) + " hour(s)" + rest;
+        }
+        else return minutes + " minutes";
+    }
 
-    public Integer getCurrentSpotId() {
+
+    public int getCurrentSpotId() {
         return currentSpotId;
     }
 
-    public void setCurrentSpotId(Integer spotId) {
+    public void setCurrentSpotId(int spotId) {
+        System.out.println("Setting spote id to: " + spotId);
         this.currentSpotId = spotId;
     }
 
-    public Integer getCurrentTypeId() {
+    public int getCurrentTypeId() {
         return currentTypeId;
     }
 
-    public void setCurrentTypeId(Integer currentTypeId) {
-        this.currentTypeId = currentTypeId;
+    public void setCurrentTypeId(int typeId) {
+        System.out.println("Setting type id to: " + typeId);
+        this.currentTypeId = typeId;
     }
 
     public void buyTicket(){
-        if(this.currentSpotId != null && this.currentTypeId != null) {
+        System.out.println(currentSpotId);
+        System.out.println(currentTypeId);
+        if(this.currentSpotId != 0 && this.currentTypeId != 0) {
             List<Spot> finalSpots = this.spots.stream().filter(spot -> spot.getSpotId() == this.currentSpotId).collect(Collectors.toList());
+            this.spots = this.spots.stream().filter(spot -> spot.getSpotId() != this.currentSpotId).collect(Collectors.toList());
             Spot currentSpot = finalSpots.get(0);
 
             List<TicketType> finalTypes = this.ticketTypes.stream().filter(spot -> spot.getTypeId() == this.currentTypeId).collect(Collectors.toList());

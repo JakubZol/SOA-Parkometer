@@ -56,4 +56,9 @@ public class TicketManager implements TicketManagerInterface {
         TypedQuery<TicketType> typedQuery = entityManager.createQuery("select tt from  TicketType tt", TicketType.class);
         return typedQuery.getResultList();
     }
+
+    public List<Ticket> getActiveTickets(){
+        TypedQuery<Ticket> typedQuery = entityManager.createQuery("select t from Ticket t where t.expiryDate > current_timestamp ", Ticket.class);
+        return typedQuery.getResultList();
+    }
 }

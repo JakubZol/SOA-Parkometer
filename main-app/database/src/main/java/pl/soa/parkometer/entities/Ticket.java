@@ -63,12 +63,17 @@ public class Ticket implements Serializable {
 
         Ticket ticket = (Ticket) o;
 
-        if (ticketId != ticket.ticketId) return false;
-        if (purchaseDate != null ? !purchaseDate.equals(ticket.purchaseDate) : ticket.purchaseDate != null)
-            return false;
-        if (expiryDate != null ? !expiryDate.equals(ticket.expiryDate) : ticket.expiryDate != null) return false;
+        if (ticketId != ticket.ticketId && ticket.getTicketId() != 0 && this.getTicketId() != 0) return false;
+        if(ticket.getSpot().getSpotId() == this.getSpot().getSpotId()) {
+            if (purchaseDate != null ? !purchaseDate.equals(ticket.purchaseDate) : ticket.purchaseDate != null)
+                return false;
+            if (expiryDate != null ? !expiryDate.equals(ticket.expiryDate) : ticket.expiryDate != null) return false;
 
-        return true;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

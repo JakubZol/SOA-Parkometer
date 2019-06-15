@@ -11,10 +11,12 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+
+//select * from spot where vacancy = false and spot_id not in (select spot_id from ticket where expiry_date > NOW());
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "spot")
-@NamedQuery(query = "Select s from Spot s where vacancy = false", name = "get occupied spots")
+@NamedQuery(query = "Select s from Spot s where s.spotId not in (select t.spot.spotId from Ticket t where t.expiryDate > current_timestamp) and s.vacancy = false", name = "get occupied spots")
 public class Spot implements Serializable {
     private int spotId;
     private String spotName;

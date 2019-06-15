@@ -4,9 +4,6 @@ import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.Ticket;
 
 import javax.ejb.Remote;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Timer;
 
 @Remote
 public interface ParkingStateControllerInterface {

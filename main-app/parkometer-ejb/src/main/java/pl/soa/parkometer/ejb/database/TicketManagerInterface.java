@@ -3,6 +3,7 @@ package pl.soa.parkometer.ejb.database;
 import pl.soa.parkometer.entities.Ticket;
 import pl.soa.parkometer.entities.TicketType;
 
+import javax.ejb.Local;
 import javax.ejb.Remote;
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface TicketManagerInterface {
     public void createTicket(Ticket t);
 
     public List<TicketType> getTicketTypes();
+
+    public List<Ticket> getActiveTickets();
 }
