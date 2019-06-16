@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="parkometer@localhost" uuid="80057090-6227-4f44-b4ec-c248d6ebc96c">
+    <data-source source="LOCAL" name="admin@localhost" uuid="80057090-6227-4f44-b4ec-c248d6ebc96c">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/parkometer</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/admin</jdbc-url>
     </data-source>
   </component>
 </project>

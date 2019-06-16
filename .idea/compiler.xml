@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="carpark" />
+        <module name="dashboard" />
         <module name="database" />
         <module name="parkometer" />
         <module name="parkometerejb" />

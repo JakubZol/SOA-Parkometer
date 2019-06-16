@@ -5,14 +5,16 @@ import pl.soa.parkometer.entities.TicketType;
 import pl.soa.parkometer.parkometer_mock.data.DataFetcher;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "parkometer", eager = true)
-@ApplicationScoped
-public class ParkometerMock {
+@SessionScoped
+public class ParkometerMock implements Serializable {
 
 
     private List<Spot> spots = DataFetcher.getSpots();

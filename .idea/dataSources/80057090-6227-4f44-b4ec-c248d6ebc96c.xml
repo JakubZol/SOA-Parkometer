@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="parkometer@localhost">
+<dataSource name="admin@localhost">
   <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.11">
     <root id="1">
       <ServerVersion>10.8</ServerVersion>
@@ -7,6 +7,9 @@
     <database id="2" parent="1" name="admin">
       <ObjectId>20520</ObjectId>
       <Owner>postgres</Owner>
+      <IntrospectionStateNumber>115</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
     </database>
     <database id="3" parent="1" name="books">
       <ObjectId>16483</ObjectId>
@@ -28,8 +31,6 @@
       <ObjectId>29886</ObjectId>
       <Owner>postgres</Owner>
       <IntrospectionStateNumber>115</IntrospectionStateNumber>
-      <Current>1</Current>
-      <Visible>1</Visible>
     </database>
     <database id="8" parent="1" name="postgres">
       <ObjectId>13055</ObjectId>
@@ -38,6 +39,7 @@
     </database>
     <role id="9" parent="1" name="admin">
       <ObjectId>20521</ObjectId>
+      <SuperRole>1</SuperRole>
       <Inherit>1</Inherit>
       <CanLogin>1</CanLogin>
       <ConnectionLimit>-1</ConnectionLimit>
@@ -95,446 +97,850 @@
       <CanLogin>1</CanLogin>
       <ConnectionLimit>-1</ConnectionLimit>
     </role>
-    <schema id="18" parent="7" name="information_schema">
+    <schema id="18" parent="2" name="information_schema">
       <ObjectId>12764</ObjectId>
       <Owner>postgres</Owner>
+      <IntrospectionTimestamp>2019-06-16.13:57:01.711</IntrospectionTimestamp>
+      <IntrospectionStateNumber>503</IntrospectionStateNumber>
     </schema>
-    <schema id="19" parent="7" name="pg_catalog">
+    <schema id="19" parent="2" name="parkometer">
+      <ObjectId>29885</ObjectId>
+      <Owner>postgres</Owner>
+      <IntrospectionTimestamp>2019-06-16.13:57:01.711</IntrospectionTimestamp>
+    </schema>
+    <schema id="20" parent="2" name="pg_catalog">
       <ObjectId>11</ObjectId>
       <Comment>system catalog schema</Comment>
       <Owner>postgres</Owner>
+      <IntrospectionTimestamp>2019-06-16.13:57:01.711</IntrospectionTimestamp>
+      <IntrospectionStateNumber>505</IntrospectionStateNumber>
     </schema>
-    <schema id="20" parent="7" name="pg_temp_1">
+    <schema id="21" parent="2" name="pg_temp_1">
       <ObjectId>11736</ObjectId>
       <Owner>postgres</Owner>
+      <IntrospectionTimestamp>2019-06-16.13:57:01.711</IntrospectionTimestamp>
     </schema>
-    <schema id="21" parent="7" name="pg_toast">
+    <schema id="22" parent="2" name="pg_toast">
       <ObjectId>99</ObjectId>
       <Comment>reserved schema for TOAST tables</Comment>
       <Owner>postgres</Owner>
+      <IntrospectionTimestamp>2019-06-16.13:57:01.711</IntrospectionTimestamp>
+      <IntrospectionStateNumber>1959</IntrospectionStateNumber>
     </schema>
-    <schema id="22" parent="7" name="pg_toast_temp_1">
+    <schema id="23" parent="2" name="pg_toast_temp_1">
       <ObjectId>11737</ObjectId>
       <Owner>postgres</Owner>
+      <IntrospectionTimestamp>2019-06-16.13:57:01.711</IntrospectionTimestamp>
     </schema>
-    <schema id="23" parent="7" name="public">
+    <schema id="24" parent="2" name="public">
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-06-08.15:56:55.438</IntrospectionTimestamp>
-      <IntrospectionStateNumber>2053</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2019-06-16.13:57:52.287</IntrospectionTimestamp>
+      <IntrospectionStateNumber>2168</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <access-method id="24" parent="7" name="btree">
+    <access-method id="25" parent="2" name="btree">
       <ObjectId>403</ObjectId>
       <Comment>b-tree index access method</Comment>
       <Handler>pg_catalog.bthandler</Handler>
       <HandlerId>330</HandlerId>
       <Type>index</Type>
     </access-method>
-    <access-method id="25" parent="7" name="hash">
+    <access-method id="26" parent="2" name="hash">
       <ObjectId>405</ObjectId>
       <Comment>hash index access method</Comment>
       <Handler>pg_catalog.hashhandler</Handler>
       <HandlerId>331</HandlerId>
       <Type>index</Type>
     </access-method>
-    <access-method id="26" parent="7" name="gist">
+    <access-method id="27" parent="2" name="gist">
       <ObjectId>783</ObjectId>
       <Comment>GiST index access method</Comment>
       <Handler>pg_catalog.gisthandler</Handler>
       <HandlerId>332</HandlerId>
       <Type>index</Type>
     </access-method>
-    <access-method id="27" parent="7" name="gin">
+    <access-method id="28" parent="2" name="gin">
       <ObjectId>2742</ObjectId>
       <Comment>GIN index access method</Comment>
       <Handler>pg_catalog.ginhandler</Handler>
       <HandlerId>333</HandlerId>
       <Type>index</Type>
     </access-method>
-    <access-method id="28" parent="7" name="spgist">
+    <access-method id="29" parent="2" name="spgist">
       <ObjectId>4000</ObjectId>
       <Comment>SP-GiST index access method</Comment>
       <Handler>pg_catalog.spghandler</Handler>
       <HandlerId>334</HandlerId>
       <Type>index</Type>
     </access-method>
-    <access-method id="29" parent="7" name="brin">
+    <access-method id="30" parent="2" name="brin">
       <ObjectId>3580</ObjectId>
       <Comment>block range index (BRIN) access method</Comment>
       <Handler>pg_catalog.brinhandler</Handler>
       <HandlerId>335</HandlerId>
       <Type>index</Type>
     </access-method>
-    <sequence id="30" parent="23" name="role_role_id_seq">
-      <ObjectId>29911</ObjectId>
+    <sequence id="31" parent="24" name="author_author_id_seq">
+      <ObjectId>29717</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2007</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="31" parent="23" name="spot_spot_id_seq">
-      <ObjectId>29927</ObjectId>
+    <sequence id="32" parent="24" name="book_book_id_seq">
+      <ObjectId>29733</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2007</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="32" parent="23" name="ticket_ticket_id_seq">
-      <ObjectId>29940</ObjectId>
+    <sequence id="33" parent="24" name="film_film_id_seq">
+      <ObjectId>29862</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2038</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="33" parent="23" name="ticket_type_type_id_seq">
-      <ObjectId>29919</ObjectId>
+    <sequence id="34" parent="24" name="hibernate_sequence">
+      <ObjectId>22142</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>1958</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="35" parent="24" name="person_person_id_seq">
+      <ObjectId>29854</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2038</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="34" parent="23" name="worker_worker_id_seq">
-      <ObjectId>29958</ObjectId>
+    <sequence id="36" parent="24" name="reader_reader_id_seq">
+      <ObjectId>29725</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2007</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="35" parent="23" name="zone_zone_id_seq">
-      <ObjectId>29903</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+    <sequence id="37" parent="24" name="spot_spot_id_seq">
+      <ObjectId>30674</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <table id="36" parent="23" name="role">
-      <ObjectId>29913</ObjectId>
+    <sequence id="38" parent="24" name="ticket_ticket_id_seq">
+      <ObjectId>30687</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="39" parent="24" name="ticket_type_type_id_seq">
+      <ObjectId>30666</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="40" parent="24" name="user_roles_role_id_seq">
+      <ObjectId>30658</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="41" parent="24" name="zone_zone_id_seq">
+      <ObjectId>30650</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <table id="42" parent="24" name="author">
+      <ObjectId>29719</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2039</StateNumber>
     </table>
-    <table id="37" parent="23" name="spot">
-      <ObjectId>29929</ObjectId>
+    <table id="43" parent="24" name="book">
+      <ObjectId>29735</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2039</StateNumber>
     </table>
-    <table id="38" parent="23" name="ticket">
-      <ObjectId>29942</ObjectId>
+    <table id="44" parent="24" name="borrowing">
+      <ObjectId>29746</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2039</StateNumber>
     </table>
-    <table id="39" parent="23" name="ticket_type">
-      <ObjectId>29921</ObjectId>
+    <table id="45" parent="24" name="collection">
+      <ObjectId>29870</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2039</StateNumber>
     </table>
-    <table id="40" parent="23" name="worker">
-      <ObjectId>29960</ObjectId>
+    <table id="46" parent="24" name="film">
+      <ObjectId>29864</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2039</StateNumber>
     </table>
-    <table id="41" parent="23" name="zone">
-      <ObjectId>29905</ObjectId>
+    <table id="47" parent="24" name="person">
+      <ObjectId>29856</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2039</StateNumber>
     </table>
-    <column id="42" parent="36" name="role_id">
+    <table id="48" parent="24" name="reader">
+      <ObjectId>29727</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2039</StateNumber>
+    </table>
+    <table id="49" parent="24" name="spot">
+      <ObjectId>30676</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+    </table>
+    <table id="50" parent="24" name="student">
+      <ObjectId>22144</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2039</StateNumber>
+    </table>
+    <table id="51" parent="24" name="ticket">
+      <ObjectId>30689</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+    </table>
+    <table id="52" parent="24" name="ticket_type">
+      <ObjectId>30668</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+    </table>
+    <table id="53" parent="24" name="user_roles">
+      <ObjectId>30660</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+    </table>
+    <table id="54" parent="24" name="users">
+      <ObjectId>30705</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+    </table>
+    <table id="55" parent="24" name="zone">
+      <ObjectId>30652</ObjectId>
+      <Owner>admin</Owner>
+      <StateNumber>2168</StateNumber>
+    </table>
+    <column id="56" parent="42" name="author_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
-      <DefaultExpression>nextval(&apos;role_role_id_seq&apos;::regclass)</DefaultExpression>
+      <StateNumber>2007</StateNumber>
+      <DefaultExpression>nextval(&apos;author_author_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
-      <SequenceName>role_role_id_seq</SequenceName>
+      <SequenceName>author_author_id_seq</SequenceName>
     </column>
-    <column id="43" parent="36" name="role_name">
+    <column id="57" parent="42" name="name">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
-      <StateNumber>2053</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="44" parent="36" name="role_pkey">
-      <ObjectId>29917</ObjectId>
-      <ColNames>role_id</ColNames>
+    <column id="58" parent="42" name="surname">
+      <Position>3</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="59" parent="42" name="author_pkey">
+      <ObjectId>29723</ObjectId>
+      <ColNames>author_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="45" parent="36" name="role_pkey">
-      <ObjectId>29918</ObjectId>
-      <ColNames>role_id</ColNames>
-      <UnderlyingIndexName>role_pkey</UnderlyingIndexName>
+    <key id="60" parent="42" name="author_pkey">
+      <ObjectId>29724</ObjectId>
+      <ColNames>author_id</ColNames>
+      <UnderlyingIndexName>author_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="46" parent="37" name="spot_id">
+    <column id="61" parent="43" name="book_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2007</StateNumber>
+      <DefaultExpression>nextval(&apos;book_book_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>book_book_id_seq</SequenceName>
+    </column>
+    <column id="62" parent="43" name="title">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="63" parent="43" name="author_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="64" parent="43" name="book_pkey">
+      <ObjectId>29739</ObjectId>
+      <ColNames>book_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="65" parent="43" name="book_pkey">
+      <ObjectId>29740</ObjectId>
+      <ColNames>book_id</ColNames>
+      <UnderlyingIndexName>book_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="66" parent="43" name="book_author_id_fkey">
+      <ObjectId>29741</ObjectId>
+      <ColNames>author_id</ColNames>
+      <RefTableId>29719</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>author</RefTableName>
+      <RefKeyName>author_pkey</RefKeyName>
+      <RefColNames>author_id</RefColNames>
+    </foreign-key>
+    <column id="67" parent="44" name="reader_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="68" parent="44" name="book_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="69" parent="44" name="borrowing_date">
+      <Position>3</Position>
+      <DataType>timestamp|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="70" parent="44" name="return_date">
+      <Position>4</Position>
+      <DataType>timestamp|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="71" parent="44" name="borrowing_pkey">
+      <ObjectId>29749</ObjectId>
+      <ColNames>book_id
+reader_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="72" parent="44" name="borrowing_pkey">
+      <ObjectId>29750</ObjectId>
+      <ColNames>book_id
+reader_id</ColNames>
+      <UnderlyingIndexName>borrowing_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="73" parent="44" name="borrowing_reader_id_fkey">
+      <ObjectId>29751</ObjectId>
+      <ColNames>reader_id</ColNames>
+      <RefTableId>29727</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>reader</RefTableName>
+      <RefKeyName>reader_pkey</RefKeyName>
+      <RefColNames>reader_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="74" parent="44" name="borrowing_book_id_fkey">
+      <ObjectId>29756</ObjectId>
+      <ColNames>book_id</ColNames>
+      <RefTableId>29735</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>book</RefTableName>
+      <RefKeyName>book_pkey</RefKeyName>
+      <RefColNames>book_id</RefColNames>
+    </foreign-key>
+    <column id="75" parent="45" name="film_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="76" parent="45" name="person_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="77" parent="45" name="collection_pkey">
+      <ObjectId>29873</ObjectId>
+      <ColNames>film_id
+person_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="78" parent="45" name="collection_pkey">
+      <ObjectId>29874</ObjectId>
+      <ColNames>film_id
+person_id</ColNames>
+      <UnderlyingIndexName>collection_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="79" parent="45" name="collection_film_id_fkey">
+      <ObjectId>29875</ObjectId>
+      <ColNames>film_id</ColNames>
+      <RefTableId>29864</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>film</RefTableName>
+      <RefKeyName>film_pkey</RefKeyName>
+      <RefColNames>film_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="80" parent="45" name="collection_person_id_fkey">
+      <ObjectId>29880</ObjectId>
+      <ColNames>person_id</ColNames>
+      <RefTableId>29856</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>person</RefTableName>
+      <RefKeyName>person_pkey</RefKeyName>
+      <RefColNames>person_id</RefColNames>
+    </foreign-key>
+    <column id="81" parent="46" name="film_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <DefaultExpression>nextval(&apos;film_film_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>film_film_id_seq</SequenceName>
+    </column>
+    <column id="82" parent="46" name="title">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="83" parent="46" name="uri">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="84" parent="46" name="film_pkey">
+      <ObjectId>29868</ObjectId>
+      <ColNames>film_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="85" parent="46" name="film_pkey">
+      <ObjectId>29869</ObjectId>
+      <ColNames>film_id</ColNames>
+      <UnderlyingIndexName>film_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="86" parent="47" name="person_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <DefaultExpression>nextval(&apos;person_person_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>person_person_id_seq</SequenceName>
+    </column>
+    <column id="87" parent="47" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="88" parent="47" name="age">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2038</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="89" parent="47" name="avatar">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>2038</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="90" parent="47" name="person_pkey">
+      <ObjectId>29860</ObjectId>
+      <ColNames>person_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="91" parent="47" name="person_pkey">
+      <ObjectId>29861</ObjectId>
+      <ColNames>person_id</ColNames>
+      <UnderlyingIndexName>person_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="92" parent="48" name="reader_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <DefaultExpression>nextval(&apos;reader_reader_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>reader_reader_id_seq</SequenceName>
+    </column>
+    <column id="93" parent="48" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="94" parent="48" name="surname">
+      <Position>3</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2007</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="95" parent="48" name="reader_pkey">
+      <ObjectId>29731</ObjectId>
+      <ColNames>reader_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="96" parent="48" name="reader_pkey">
+      <ObjectId>29732</ObjectId>
+      <ColNames>reader_id</ColNames>
+      <UnderlyingIndexName>reader_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="97" parent="49" name="spot_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2168</StateNumber>
       <DefaultExpression>nextval(&apos;spot_spot_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
       <SequenceName>spot_spot_id_seq</SequenceName>
     </column>
-    <column id="47" parent="37" name="spot_name">
+    <column id="98" parent="49" name="spot_name">
       <Position>2</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="48" parent="37" name="zone_id">
+    <column id="99" parent="49" name="zone_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="49" parent="37" name="vacancy">
+    <column id="100" parent="49" name="vacancy">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="50" parent="37" name="occupation_date">
+    <column id="101" parent="49" name="occupation_date">
       <Position>5</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="51" parent="37" name="spot_pkey">
-      <ObjectId>29933</ObjectId>
+    <index id="102" parent="49" name="spot_pkey">
+      <ObjectId>30680</ObjectId>
       <ColNames>spot_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="52" parent="37" name="spot_pkey">
-      <ObjectId>29934</ObjectId>
+    <key id="103" parent="49" name="spot_pkey">
+      <ObjectId>30681</ObjectId>
       <ColNames>spot_id</ColNames>
       <UnderlyingIndexName>spot_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="53" parent="37" name="spot_zone_id_fkey">
-      <ObjectId>29935</ObjectId>
+    <foreign-key id="104" parent="49" name="spot_zone_id_fkey">
+      <ObjectId>30682</ObjectId>
       <ColNames>zone_id</ColNames>
-      <RefTableId>29905</RefTableId>
+      <RefTableId>30652</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>zone</RefTableName>
       <RefKeyName>zone_pkey</RefKeyName>
       <RefColNames>zone_id</RefColNames>
     </foreign-key>
-    <column id="54" parent="38" name="ticket_id">
+    <column id="105" parent="50" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>1959</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="106" parent="50" name="joindate">
+      <Position>2</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>1959</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="107" parent="50" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>1959</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="108" parent="50" name="surname">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1959</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="109" parent="50" name="student_pkey">
+      <ObjectId>22150</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="110" parent="50" name="student_pkey">
+      <ObjectId>22151</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>student_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="111" parent="51" name="ticket_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2168</StateNumber>
       <DefaultExpression>nextval(&apos;ticket_ticket_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
       <SequenceName>ticket_ticket_id_seq</SequenceName>
     </column>
-    <column id="55" parent="38" name="spot_id">
+    <column id="112" parent="51" name="spot_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="56" parent="38" name="purchase_date">
+    <column id="113" parent="51" name="purchase_date">
       <Position>3</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="57" parent="38" name="expiry_date">
+    <column id="114" parent="51" name="expiry_date">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="58" parent="38" name="type_id">
+    <column id="115" parent="51" name="type_id">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="59" parent="38" name="ticket_pkey">
-      <ObjectId>29946</ObjectId>
+    <index id="116" parent="51" name="ticket_pkey">
+      <ObjectId>30693</ObjectId>
       <ColNames>ticket_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="60" parent="38" name="ticket_pkey">
-      <ObjectId>29947</ObjectId>
+    <key id="117" parent="51" name="ticket_pkey">
+      <ObjectId>30694</ObjectId>
       <ColNames>ticket_id</ColNames>
       <UnderlyingIndexName>ticket_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="61" parent="38" name="ticket_spot_id_fkey">
-      <ObjectId>29948</ObjectId>
+    <foreign-key id="118" parent="51" name="ticket_spot_id_fkey">
+      <ObjectId>30695</ObjectId>
       <ColNames>spot_id</ColNames>
-      <RefTableId>29929</RefTableId>
+      <RefTableId>30676</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>spot</RefTableName>
       <RefKeyName>spot_pkey</RefKeyName>
       <RefColNames>spot_id</RefColNames>
     </foreign-key>
-    <foreign-key id="62" parent="38" name="ticket_type_id_fkey">
-      <ObjectId>29953</ObjectId>
+    <foreign-key id="119" parent="51" name="ticket_type_id_fkey">
+      <ObjectId>30700</ObjectId>
       <ColNames>type_id</ColNames>
-      <RefTableId>29921</RefTableId>
+      <RefTableId>30668</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>ticket_type</RefTableName>
       <RefKeyName>ticket_type_pkey</RefKeyName>
       <RefColNames>type_id</RefColNames>
     </foreign-key>
-    <column id="63" parent="39" name="type_id">
+    <column id="120" parent="52" name="type_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <DefaultExpression>nextval(&apos;ticket_type_type_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
       <SequenceName>ticket_type_type_id_seq</SequenceName>
     </column>
-    <column id="64" parent="39" name="time">
+    <column id="121" parent="52" name="time">
       <Position>2</Position>
-      <DataType>interval|0s</DataType>
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
-      <TypeId>1186</TypeId>
+      <StateNumber>2168</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="65" parent="39" name="price">
+    <column id="122" parent="52" name="price">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="66" parent="39" name="ticket_type_pkey">
-      <ObjectId>29925</ObjectId>
+    <index id="123" parent="52" name="ticket_type_pkey">
+      <ObjectId>30672</ObjectId>
       <ColNames>type_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="67" parent="39" name="ticket_type_pkey">
-      <ObjectId>29926</ObjectId>
+    <key id="124" parent="52" name="ticket_type_pkey">
+      <ObjectId>30673</ObjectId>
       <ColNames>type_id</ColNames>
       <UnderlyingIndexName>ticket_type_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="68" parent="40" name="worker_id">
+    <column id="125" parent="53" name="role_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
-      <DefaultExpression>nextval(&apos;worker_worker_id_seq&apos;::regclass)</DefaultExpression>
+      <StateNumber>2168</StateNumber>
+      <DefaultExpression>nextval(&apos;user_roles_role_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
-      <SequenceName>worker_worker_id_seq</SequenceName>
+      <SequenceName>user_roles_role_id_seq</SequenceName>
     </column>
-    <column id="69" parent="40" name="role_id">
+    <column id="126" parent="53" name="login">
+      <Position>2</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <StateNumber>2168</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="127" parent="53" name="userrole">
+      <Position>3</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <StateNumber>2168</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="128" parent="53" name="user_roles_pkey">
+      <ObjectId>30664</ObjectId>
+      <ColNames>role_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="129" parent="53" name="user_roles_pkey">
+      <ObjectId>30665</ObjectId>
+      <ColNames>role_id</ColNames>
+      <UnderlyingIndexName>user_roles_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="130" parent="54" name="login">
+      <Position>1</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2168</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="131" parent="54" name="zone_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="70" parent="40" name="zone_id">
+    <column id="132" parent="54" name="passwd">
       <Position>3</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>2053</StateNumber>
-      <TypeId>23</TypeId>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2168</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <column id="71" parent="40" name="login">
+    <column id="133" parent="54" name="name">
       <Position>4</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="72" parent="40" name="passwd">
+    <column id="134" parent="54" name="surname">
       <Position>5</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="73" parent="40" name="name">
-      <Position>6</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="74" parent="40" name="surname">
-      <Position>7</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="75" parent="40" name="worker_pkey">
-      <ObjectId>29964</ObjectId>
-      <ColNames>worker_id</ColNames>
+    <index id="135" parent="54" name="users_pkey">
+      <ObjectId>30708</ObjectId>
+      <ColNames>login</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="76" parent="40" name="worker_pkey">
-      <ObjectId>29965</ObjectId>
-      <ColNames>worker_id</ColNames>
-      <UnderlyingIndexName>worker_pkey</UnderlyingIndexName>
+    <key id="136" parent="54" name="users_pkey">
+      <ObjectId>30709</ObjectId>
+      <ColNames>login</ColNames>
+      <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="77" parent="40" name="worker_role_id_fkey">
-      <ObjectId>29966</ObjectId>
-      <ColNames>role_id</ColNames>
-      <RefTableId>29913</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>role</RefTableName>
-      <RefKeyName>role_pkey</RefKeyName>
-      <RefColNames>role_id</RefColNames>
-    </foreign-key>
-    <foreign-key id="78" parent="40" name="worker_zone_id_fkey">
-      <ObjectId>29971</ObjectId>
+    <foreign-key id="137" parent="54" name="users_zone_id_fkey">
+      <ObjectId>30710</ObjectId>
       <ColNames>zone_id</ColNames>
-      <RefTableId>29905</RefTableId>
+      <RefTableId>30652</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>zone</RefTableName>
       <RefKeyName>zone_pkey</RefKeyName>
       <RefColNames>zone_id</RefColNames>
     </foreign-key>
-    <column id="79" parent="41" name="zone_id">
+    <column id="138" parent="55" name="zone_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <DefaultExpression>nextval(&apos;zone_zone_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
       <SequenceName>zone_zone_id_seq</SequenceName>
     </column>
-    <column id="80" parent="41" name="zone_name">
+    <column id="139" parent="55" name="zone_name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2053</StateNumber>
+      <StateNumber>2168</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="81" parent="41" name="zone_pkey">
-      <ObjectId>29909</ObjectId>
+    <index id="140" parent="55" name="zone_pkey">
+      <ObjectId>30656</ObjectId>
       <ColNames>zone_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="82" parent="41" name="zone_pkey">
-      <ObjectId>29910</ObjectId>
+    <key id="141" parent="55" name="zone_pkey">
+      <ObjectId>30657</ObjectId>
       <ColNames>zone_id</ColNames>
       <UnderlyingIndexName>zone_pkey</UnderlyingIndexName>
       <Primary>1</Primary>

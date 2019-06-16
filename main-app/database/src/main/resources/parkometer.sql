@@ -1,8 +1,8 @@
 drop table spot cascade;
 drop table zone cascade;
 drop table ticket cascade;
-drop table worker cascade;
-drop table role cascade;
+drop table users cascade;
+drop table user_roles cascade;
 drop table ticket_type cascade;
 
 begin;
@@ -12,9 +12,10 @@ create table zone(
 	zone_name varchar(20) not null
 );
 
-create table role(
-	role_id SERIAL PRIMARY KEY,
-	role_name varchar(30)
+create table user_roles(
+  role_id SERIAL PRIMARY KEY,
+	login varchar(30),
+	userRole varchar(30)
 );
 
 create table ticket_type(
@@ -39,11 +40,9 @@ create table ticket(
 	type_id integer references ticket_type
 );
 
-create table worker(
-	worker_id SERIAL PRIMARY KEY,
-	role_id integer not null references role,
+create table users(
+	login varchar(30) PRIMARY KEY,
 	zone_id integer references zone,
-	login varchar(30) not null,
 	passwd varchar(30) not null,
 	name varchar(30) not null,
 	surname varchar(30) not null
@@ -51,11 +50,17 @@ create table worker(
 
 
 
-insert into role (role_id, role_name) values
-(default, 'worker'),
-(default, 'admin');
+insert into user_roles (role_id, login, userRole) values
+(default, 'user1', 'Employee'),
+(default,'user2', 'Employee'),
+(default,'user3', 'Employee'),
+(default,'user4', 'Employee'),
+(default,'user5', 'Employee'),
+(default,'user6', 'Employee'),
+(default,'user7', 'Admin');
 
 insert into ticket_type (type_id, time, price) values
+(default, 1, 1),
 (default, 60, 3),
 (default, 120, 5),
 (default, 30, 2),
@@ -69,14 +74,14 @@ insert into zone (zone_id, zone_name) values
 (default, 'Zone 4'),
 (default, 'Zone 5');
 
-insert into worker (worker_id, role_id, zone_id, login, passwd, name, surname) values
-(default, 1, 1, 'login1', 'admin1', 'Jan', 'Kowalski'),
-(default, 1, 2, 'login2', 'admin2', 'Adam', 'Nowak'),
-(default, 1, 3, 'login3', 'admin3', 'Mateusz', 'Wójcik'),
-(default, 1, 4, 'login4', 'admin4', 'Piotr', 'Wiśniewski'),
-(default, 1, 5, 'login5', 'admin5', 'Grzegorz', 'Kamiński'),
-(default, 1, 1, 'login11', 'admin11', 'Jakub', 'Szymański'),
-(default, 2, null, 'login6', 'admin6', 'Filip', 'Zieliński');
+insert into users (login, zone_id, passwd, name, surname) values
+('user1', 1, 'admin1', 'Jan', 'Kowalski'),
+('user2', 2, 'admin2', 'Adam', 'Nowak'),
+('user3', 3, 'admin3', 'Mateusz', 'Wójcik'),
+('user4', 4, 'admin4', 'Piotr', 'Wiśniewski'),
+('user5', 5, 'admin5', 'Grzegorz', 'Kamiński'),
+('user6', 1, 'admin11', 'Jakub', 'Szymański'),
+('user7', null, 'admin6', 'Filip', 'Zieliński');
 
 insert into spot (spot_id, spot_name, zone_id, vacancy, occupation_date) values
 (default, 'spot11', 1, true, null),

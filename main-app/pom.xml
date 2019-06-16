@@ -17,6 +17,7 @@
         <module>parkometer-ejb-impl</module>
         <module>REST</module>
         <module>SOAP</module>
+        <module>dashboard</module>
     </modules>
 
     <properties>
