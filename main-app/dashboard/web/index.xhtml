@@ -5,7 +5,12 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <f:view>
-      <h:outputLabel value="Hello, logged in!!!!"/>
-   </f:view>
+<h:head>
+   <title>Dashboard: #{dashboard.user.login}</title>
+</h:head>
+<h:body>
+   <h:outputText value="Welcome #{dashboard.user.login} !!"/><br/>
+   <h:outputText value="Your Zone: #{dashboard.spots.get(0).zone.zoneName}"/><br/>
+   <h:outputText value="Allowed users: #{dashboard.users.size()}"/>
+</h:body>
 </html>

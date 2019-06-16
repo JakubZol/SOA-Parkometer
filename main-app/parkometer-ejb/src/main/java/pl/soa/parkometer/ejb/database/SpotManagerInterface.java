@@ -17,4 +17,6 @@ public interface SpotManagerInterface {
     public void deleteSpot(int id);
 
     public List<Spot> getOccupiedSpots();
+
+    public List<Spot> getSpotsByZone(int zoneId);
 }
