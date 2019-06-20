@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/car-park" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/dashboard" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/database" />
+    <file type="web" url="file://$PROJECT_DIR$/main-app/JMS-REST-API" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb-impl" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/REST" />
@@ -18,6 +20,8 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/main-app/JMS-REST-API/pom.xml" />
+        <option value="$PROJECT_DIR$/main-app/JMS/pom.xml" />
         <option value="$PROJECT_DIR$/main-app/soap/pom.xml" />
       </set>
     </option>

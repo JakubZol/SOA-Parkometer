@@ -1,10 +1,13 @@
 package pl.soa.parkometer.ejb.impl.security;
 
 import pl.soa.parkometer.ejb.database.SpotManagerInterface;
+import pl.soa.parkometer.ejb.database.TicketManagerInterface;
 import pl.soa.parkometer.ejb.database.UserManagerInterface;
+import pl.soa.parkometer.ejb.impl.database.TicketManager;
 import pl.soa.parkometer.ejb.security.DashboardControllerInterface;
 import pl.soa.parkometer.ejb.security.UsersControllerInterface;
 import pl.soa.parkometer.entities.Spot;
+import pl.soa.parkometer.entities.Ticket;
 import pl.soa.parkometer.entities.User;
 
 import javax.annotation.Resource;
@@ -22,6 +25,9 @@ public class DashboardController implements DashboardControllerInterface {
 
     @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/UserManager")
     UserManagerInterface userManager;
+
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/TicketManager")
+    TicketManagerInterface ticketManager;
 
     @Resource
     SessionContext ctx;
@@ -52,5 +58,11 @@ public class DashboardController implements DashboardControllerInterface {
         }
 
         return new LinkedList<>();
+    }
+
+    @RolesAllowed({"Admin", "Employee"})
+    @Lock(LockType.READ)
+    public List<Ticket> getTicketsBySpot(int spotId){
+        return ticketManager.getTicketsBySpot(spotId);
     }
 }

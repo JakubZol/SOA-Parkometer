@@ -12,5 +12,5 @@ public interface UserManagerInterface {
 
     public List<User> getAllUsers(String login);
 
-    public void updateUsersPassword(User u, String passwd);
+    public void updateUser(User u);
 }

@@ -25,6 +25,11 @@ public class SpotManager implements SpotManagerInterface {
         return s;
     }
 
+    public List<Spot> getFreeSpots(){
+        TypedQuery<Spot> typedQuery = entityManager.createQuery("select s from  Spot s where s.vacancy = true", Spot.class);
+        return typedQuery.getResultList();
+    }
+
     public List<Spot> getAllSpots(){
 
         TypedQuery<Spot> typedQuery = entityManager.createQuery("select s from  Spot s", Spot.class);

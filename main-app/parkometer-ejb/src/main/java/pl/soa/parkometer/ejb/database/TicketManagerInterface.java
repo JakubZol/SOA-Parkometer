@@ -23,4 +23,6 @@ public interface TicketManagerInterface {
     public List<TicketType> getTicketTypes();
 
     public List<Ticket> getActiveTickets();
+
+    public List<Ticket> getTicketsBySpot(int spotId);
 }

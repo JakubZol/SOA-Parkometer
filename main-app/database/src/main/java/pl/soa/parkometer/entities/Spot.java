@@ -3,10 +3,7 @@ package pl.soa.parkometer.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,7 +11,6 @@ import java.util.List;
 
 //select * from spot where vacancy = false and spot_id not in (select spot_id from ticket where expiry_date > NOW());
 @Entity
-@XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "spot")
 @NamedQuery(query = "Select s from Spot s where s.spotId not in (select t.spot.spotId from Ticket t where t.expiryDate > current_timestamp) and s.vacancy = false", name = "get occupied spots")
 public class Spot implements Serializable {
@@ -61,7 +57,7 @@ public class Spot implements Serializable {
 
     @Basic
     @Column(name = "occupation_date", nullable = true)
-    @XmlAttribute(name = "occupationDate")
+   // @XmlAttribute(name = "occupationDate")
     public Timestamp getOccupationDate() {
         return occupationDate;
     }
@@ -96,8 +92,8 @@ public class Spot implements Serializable {
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "spot")
-    @XmlAttribute(name = "tickets")
+    @OneToMany(fetch = FetchType.LAZY)
+    @XmlElement(name = "tickets")
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -109,7 +105,7 @@ public class Spot implements Serializable {
     //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "zone_id", referencedColumnName = "zone_id", nullable = false)
-    @XmlAttribute(name = "zone")
+    @XmlElement(name = "zone")
     public Zone getZone() {
         return zone;
     }

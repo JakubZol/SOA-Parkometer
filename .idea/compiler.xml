@@ -16,6 +16,8 @@
         <module name="SOAP" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="JMSRESTAPI" target="1.11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

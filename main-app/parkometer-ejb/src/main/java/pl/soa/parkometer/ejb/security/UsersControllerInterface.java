@@ -12,5 +12,7 @@ public interface UsersControllerInterface {
 
     public List<User> getUsers();
 
-    public void updateUsersPassword(User u, String passwd);
+    public void updateUsersPassword(String passwd);
+
+    public void updateOtherUserPassword(User u, String passwd);
 }

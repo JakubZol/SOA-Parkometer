@@ -4,13 +4,114 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:g="http://java.sun.com/jsf/core">
 <h:head>
    <title>Dashboard: #{dashboard.user.login}</title>
+   <style type="text/css">
+      body{
+         display: flex;
+         justify-content: space-between;
+      }
+
+      .visible{
+         display: block;
+      }
+
+      .unvisible{
+         display: none;
+      }
+
+      #main{
+         width: 60%;
+      }
+
+      #main table{
+         width: 90%;
+         height: 600px;
+         text-align: center;
+         margin: 5px auto;
+      }
+
+      #side{
+         width:30%;
+         border-left: 1px dashed gray;
+         height: 100vh;
+      }
+
+      .green{
+         color:green;
+      }
+
+      .red{
+         color:red;
+      }
+
+      .passwd-form{
+         margin: 0 auto 10px;
+         text-align: center;
+         padding: 20px;
+      }
+
+      .passwd-form input[type="password"]{
+         margin: 7px 0;
+         width:300px;
+         height: 30px;
+      }
+
+      .passwd-form selet{
+         width: 300px;
+         margin: 7px 0;
+         height: 30px;
+      }
+   </style>
 </h:head>
 <h:body>
-   <h:outputText value="Welcome #{dashboard.user.login} !!"/><br/>
-   <h:outputText value="Your Zone: #{dashboard.spots.get(0).zone.zoneName}"/><br/>
-   <h:outputText value="Allowed users: #{dashboard.users.size()}"/>
+   <h:panelGrid id="main">
+      <h:outputText value="User: #{dashboard.user.login} | #{dashboard.user.name} #{dashboard.user.surname}"/><br/>
+      <h:outputText value="Zone: #{dashboard.user.zone.zoneName}"/><br/>
+      <h:form>
+      <h:dataTable value="#{dashboard.spots}" var="spot" border="2"
+                   cellspacing="1" cellpadding="1">
+         <h:column>
+            <f:facet name="header">Spot</f:facet>
+            #{spot.spotName}
+         </h:column>
+
+         <h:column>
+            <f:facet name="header">Zone</f:facet>
+            #{spot.zone.zoneName}
+         </h:column>
+
+         <h:column>
+            <f:facet name="header">Vacancy</f:facet>
+            <span class="#{spot.vacancy ? 'green' : 'red'}">#{spot.vacancy ? "free" : "occupied"}</span>
+         </h:column>
+         
+         <h:column>
+            <f:facet name="header">Tickets</f:facet>
+            <h:commandButton value="Check tickets" action="#{dashboard.fetchTickets(spot.spotId)}"/>
+         </h:column>
+      </h:dataTable>
+      </h:form>
+   </h:panelGrid>
+
+   <h:panelGrid id="side">
+      <h:form class="passwd-form" >
+         <h2>Change your password</h2>
+         <h:inputSecret label="New Password" value="#{dashboard.currentUserPassword}"/> <br/>
+         <h:inputSecret label="Repeat new password" value="#{dashboard.currentUserPasswordRepeated}"/> <br/>
+         <h:commandButton value="Change password" onclick="#{dashboard.updatePassword()}"/>
+      </h:form>
+
+      <h:form class="passwd-form #{dashboard.users.size() > 0 ? 'visible' : 'unvisible'}">
+         <h2>Change password for another user:</h2>
+         <h:selectOneMenu value="#{dashboard.currentUserLogin}">
+            <f:selectItems var="user" value="#{dashboard.users}" itemLabel="#{user.login} | #{user.name} #{user.surname}" itemValue="#{user.login}"/>
+         </h:selectOneMenu>
+         <h:inputSecret label="New Password" value="#{dashboard.currentOtherPassword}"/> <br/>
+         <h:inputSecret label="Repeat new password" value="#{dashboard.currentOtherPasswordRepeated}"/> <br/>
+         <h:commandButton value="Change password" onclick="#{dashboard.updateUsersPassword()}"/>
+      </h:form>
+   </h:panelGrid>
 </h:body>
 </html>

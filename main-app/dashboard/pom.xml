@@ -23,11 +23,6 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
             <groupId>pl.soa.parkometer</groupId>
             <artifactId>parkometer-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>

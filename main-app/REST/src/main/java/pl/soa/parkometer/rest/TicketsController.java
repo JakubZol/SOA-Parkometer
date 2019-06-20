@@ -32,7 +32,7 @@ public class TicketsController {
     @Consumes({MediaType.APPLICATION_JSON})
     public void createTicket(Ticket t){
         this.ticketManager.createTicket(t);
-        parkingStateController.updateTicketQueue(t);
+        parkingStateController.setTicketsQuery(ticketManager.getActiveTickets());
     }
 
 }

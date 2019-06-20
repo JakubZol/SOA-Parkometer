@@ -1,12 +1,10 @@
 package pl.soa.parkometer.ejb.impl.security;
 
 import pl.soa.parkometer.ejb.database.UserManagerInterface;
-import pl.soa.parkometer.ejb.impl.database.UserManager;
 import pl.soa.parkometer.ejb.security.UsersControllerInterface;
 import pl.soa.parkometer.entities.User;
 
 import javax.annotation.Resource;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
 import java.security.Principal;
 import java.util.LinkedList;
@@ -39,12 +37,16 @@ public class UserController implements UsersControllerInterface {
         }
     }
 
-    public void updateUsersPassword(){
 
+    public void updateUsersPassword(String passwd){
+        User u = this.getUser();
+        u.setPasswd(passwd);
+        userManager.updateUser(u);
     }
 
-    public void updateUsersPassword(User u, String passwd){
-        userManager.updateUsersPassword(u, passwd);
+    public void updateOtherUserPassword(User u, String passwd){
+        u.setPasswd(passwd);
+        userManager.updateUser(u);
     }
 
 }

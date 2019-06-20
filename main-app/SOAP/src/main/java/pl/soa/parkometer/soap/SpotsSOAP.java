@@ -1,10 +1,12 @@
 package pl.soa.parkometer.soap;
 
 import pl.soa.parkometer.ejb.database.SpotManagerInterface;
+import pl.soa.parkometer.entities.Spot;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import java.util.List;
 
 @WebService
 public class SpotsSOAP {
@@ -13,8 +15,8 @@ public class SpotsSOAP {
     SpotManagerInterface spotManager;
 
     @WebMethod
-    public void testSOAP(){
-        System.out.println("this is working SOAP");
+    public List<Spot> getFreeSpots(){
+        return spotManager.getFreeSpots();
     }
 
 

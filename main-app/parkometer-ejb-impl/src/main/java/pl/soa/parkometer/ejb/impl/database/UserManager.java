@@ -29,10 +29,10 @@ public class UserManager implements UserManagerInterface {
         return typedQuery.setParameter("login", userLogin).getResultList();
     }
 
-    public void updateUsersPassword(User u, String passwd){
+    public void updateUser(User u){
 
         entityManager.getTransaction().begin();
-        u.setPasswd(passwd);
+        entityManager.merge(u);
         entityManager.getTransaction().commit();
 
     }

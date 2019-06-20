@@ -1,11 +1,11 @@
 package pl.soa.parkometer.ejb.impl.core;
 
 import pl.soa.parkometer.ejb.core.ParkingStateControllerInterface;
-import pl.soa.parkometer.ejb.impl.database.TicketManager;
 import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.Ticket;
 
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -14,24 +14,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Singleton
+@Startup
 public class ParkingStateController implements ParkingStateControllerInterface {
 
-
-    private TicketManager ticketManager = new TicketManager();
     private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
     private List<Ticket> ticketsQuery;
     private List<Spot> spotsQuery = new LinkedList<>(); //tutaj później pobierać dane
 
     ParkingStateController(){
         System.out.println("I am here!!");
-        ticketsQuery = ticketManager.getActiveTickets();
-        for(Ticket t : ticketsQuery){
-            System.out.println("Ticket: " + t.getTicketId());
-        }
         executor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                System.out.println("I am working");
                 List<Ticket> delayed = ticketsQuery.stream().filter(spot -> spot.getExpiryDate().before(new Timestamp(new Date().getTime()))).collect(Collectors.toList());
                 for(Ticket t: delayed){
                     System.out.println("Ticket " + t.getTicketId() + " has expired!");
@@ -67,6 +61,10 @@ public class ParkingStateController implements ParkingStateControllerInterface {
     public void deleteTicket(int id){
         this.ticketsQuery = this.ticketsQuery.stream().filter(ticket -> ticket.getTicketId() != id).collect(Collectors.toList());
         System.out.println("deleted ticket with id: " + id);
+    }
+
+    public void setTicketsQuery(List<Ticket> tickets){
+        this.ticketsQuery = tickets;
     }
 
     public void sendMessage(){

@@ -2,6 +2,8 @@ package pl.soa.parkometer.carpark_mock.bean;
 
 
 import pl.soa.parkometer.carpark_mock.ZonesInitializer;
+import pl.soa.parkometer.carpark_mock.soap_client.SOAPClient;
+import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Spot;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -11,10 +13,21 @@ import java.util.*;
 @ApplicationScoped
 public class CarParkMock {
 
+    private int currentSpotId;
+    private SOAPClient soapClient = new SOAPClient();
+    private List<Spot> spots = soapClient.getSpots();
     private Map<String, Vector<String>> zones = ZonesInitializer.initializeZones();
     private Set<String> zonesList = zones.keySet();
     private String currentZone = zonesList.iterator().next();
     private String currentLot = zones.get(currentZone).firstElement();
+
+    public List<Spot> getSpots() {
+        return spots;
+    }
+
+    public void setCurrentSpotId(int currentSpotId) {
+        this.currentSpotId = currentSpotId;
+    }
 
     public Set<String> getZonesList(){
         return this.zonesList;

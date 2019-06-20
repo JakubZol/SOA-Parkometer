@@ -19,8 +19,8 @@ public class ParkometerMock implements Serializable {
 
     private List<Spot> spots = DataFetcher.getSpots();
     private List<TicketType> ticketTypes = DataFetcher.getTicketTypes();
-    private int currentSpotId;
-    private int currentTypeId;
+    private int currentSpotId = 1;
+    private int currentTypeId = 1;
 
     public List<Spot> getSpots(){
         return this.spots;

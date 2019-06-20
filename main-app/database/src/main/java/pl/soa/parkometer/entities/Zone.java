@@ -3,12 +3,14 @@ package pl.soa.parkometer.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "zone", schema = "public", catalog = "admin")
+@XmlRootElement(name="zone")
 public class Zone implements Serializable {
     private int zoneId;
     private String zoneName;
@@ -16,6 +18,7 @@ public class Zone implements Serializable {
 
     @Id
     @Column(name = "zone_id", nullable = false)
+    @XmlAttribute(name = "zoneId")
     public int getZoneId() {
         return zoneId;
     }
@@ -26,6 +29,7 @@ public class Zone implements Serializable {
 
     @Basic
     @Column(name = "zone_name", nullable = false, length = 20)
+    @XmlAttribute(name="zoneName")
     public String getZoneName() {
         return zoneName;
     }

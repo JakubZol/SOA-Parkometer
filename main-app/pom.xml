@@ -18,6 +18,7 @@
         <module>REST</module>
         <module>SOAP</module>
         <module>dashboard</module>
+        <module>JMS-REST-API</module>
     </modules>
 
     <properties>

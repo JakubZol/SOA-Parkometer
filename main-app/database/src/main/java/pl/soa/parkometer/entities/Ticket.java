@@ -4,15 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "ticket")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Ticket implements Serializable {
@@ -36,7 +32,7 @@ public class Ticket implements Serializable {
 
     @Basic
     @Column(name = "purchase_date", nullable = false)
-    @XmlAttribute(name = "purchaseDate")
+    @XmlElement(name = "purchaseDate")
     public Timestamp getPurchaseDate() {
         return purchaseDate;
     }
@@ -47,7 +43,7 @@ public class Ticket implements Serializable {
 
     @Basic
     @Column(name = "expiry_date", nullable = false)
-    @XmlAttribute(name = "expiryDate")
+    @XmlElement(name = "expiryDate")
     public Timestamp getExpiryDate() {
         return expiryDate;
     }
@@ -87,7 +83,7 @@ public class Ticket implements Serializable {
     //@JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-    @XmlAttribute(name = "ticketType")
+    @XmlElement(name = "ticketType")
     public TicketType getType() {
         return type;
     }
@@ -96,10 +92,10 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
-    //@JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
-    @XmlAttribute(name = "spot")
+    @XmlElement(name = "spot")
     public Spot getSpot() {
         return spot;
     }

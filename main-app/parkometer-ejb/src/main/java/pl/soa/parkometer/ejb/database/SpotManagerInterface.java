@@ -18,5 +18,7 @@ public interface SpotManagerInterface {
 
     public List<Spot> getOccupiedSpots();
 
+    public List<Spot> getFreeSpots();
+
     public List<Spot> getSpotsByZone(int zoneId);
 }
