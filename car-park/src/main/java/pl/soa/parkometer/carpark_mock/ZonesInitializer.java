@@ -16,6 +16,10 @@ public class ZonesInitializer {
         return soapClient.getFreeSpots();
     }
 
+    public static void updateSpot(Spot s){
+        soapClient.updateSpot(s);
+    }
+
     public static Map<String, Vector<String>> initializeZones(){
         Map<String, Vector<String>> zones = new HashMap<String, Vector<String>>();
         String zone;

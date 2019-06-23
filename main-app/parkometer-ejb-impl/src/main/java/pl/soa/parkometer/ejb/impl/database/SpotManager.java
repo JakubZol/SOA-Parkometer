@@ -37,7 +37,11 @@ public class SpotManager implements SpotManagerInterface {
 
     }
 
-    public void updateSpot(Spot s){ System.out.println("TO DO!"); }
+    public void updateSpot(Spot s){
+        entityManager.getTransaction().begin();
+        entityManager.merge(s);
+        entityManager.getTransaction().commit();
+    }
 
     public void deleteSpot(int id){
         entityManager.getTransaction().begin();

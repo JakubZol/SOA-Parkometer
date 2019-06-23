@@ -5,6 +5,7 @@ import pl.soa.parkometer.carpark_mock.ZonesInitializer;
 import pl.soa.parkometer.carpark_mock.soap_client.SOAPClient;
 import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Spot;
 import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Timestamp;
+import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Zone;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -71,16 +72,13 @@ public class CarParkMock {
 
     public void takeSpot(){
         int spotId = Integer.parseInt(currentSpotId);
-        Timestamp t = new Timestamp();
-        t.setNanos((int)System.currentTimeMillis() * 1000000);
-        System.out.println(t.getNanos());
-        System.out.println(System.currentTimeMillis() * 1000000);
 
-        /*List<Spot> spots = this.spots.stream().filter(spot -> spot.getSpotId() == spotId).collect(Collectors.toList());
+        List<Spot> spots = this.spots.stream().filter(spot -> spot.getSpotId() == spotId).collect(Collectors.toList());
         if(spots.size() > 0){
             Spot s = spots.get(0);
             s.setIsVacancy(false);
-        }*/
+            ZonesInitializer.updateSpot(s);
+        }
     }
 
 
