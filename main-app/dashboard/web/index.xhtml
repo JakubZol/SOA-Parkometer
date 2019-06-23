@@ -58,7 +58,7 @@
          height: 30px;
       }
 
-      .passwd-form selet{
+      .passwd-form select{
          width: 300px;
          margin: 7px 0;
          height: 30px;
@@ -68,7 +68,7 @@
 <h:body>
    <h:panelGrid id="main">
       <h:outputText value="User: #{dashboard.user.login} | #{dashboard.user.name} #{dashboard.user.surname}"/><br/>
-      <h:outputText value="Zone: #{dashboard.user.zone.zoneName}"/><br/>
+      <h:outputText value="Zone: #{dashboard.user.zone == null ? 'Admin (access to every zone)' :  dashboard.user.zone.zoneName}"/><br/>
       <h:form>
       <h:dataTable value="#{dashboard.spots}" var="spot" border="2"
                    cellspacing="1" cellpadding="1">

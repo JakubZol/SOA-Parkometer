@@ -92,7 +92,7 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     @XmlElement(name = "spot")

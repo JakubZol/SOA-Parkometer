@@ -28,13 +28,14 @@
 <h:body>
     <h1>Welcome to car park!</h1>
     <h:form>
-        <h:panelGrid class="selection-panel">
+        <h:outputText value="#{carpark.spots.size()}"/>
+        <!--<h:panelGrid class="selection-panel">
             <h3>Select Parking Spot:</h3>
             <h:selectOneMenu value="#{carpark.currentSpotId}" id="spots">
                 <f:selectItems var="spot" value="#{carpark.spots}" itemLabel="#{spot.spotName} | #{spot.zone.zoneName}" itemValue="#{spot.spotId}"/>
             </h:selectOneMenu>
         </h:panelGrid>
-        <!--<h:panelGrid class="selection-panel">
+        <!-<h:panelGrid class="selection-panel">
             <h3>Select Zone:</h3>
             <h:selectOneMenu value="#{carpark.currentZone}" id="zones">
                 <f:selectItems var="zone" value="#{carpark.zonesList}" itemLabel="#{zone}" itemValue="#{zone}"/>

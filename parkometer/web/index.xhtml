@@ -37,10 +37,9 @@
     <h:form id="form">
 
         <h:panelGrid class="form-panel">
-            <h4>Select Parking Lot:</h4>
+            <h4>Select Parking Spot:</h4>
             <h:selectOneMenu value="#{parkometer.currentSpotId}" id="lots">
                 <f:selectItems var="spot" value="#{parkometer.spots}" itemLabel="#{spot.spotName} | #{spot.zone.zoneName}" itemValue="#{spot.spotId}"/>
-                <f:ajax event="change" update="@this" />
             </h:selectOneMenu>
         </h:panelGrid>
 
@@ -48,13 +47,10 @@
             <h4>Chose ticket</h4>
             <h:selectOneMenu value="#{parkometer.currentTypeId}" id="time">
                 <f:selectItems var="type" value="#{parkometer.ticketTypes}" itemLabel="#{parkometer.transformTime(type.time)} | #{type.price} zł" itemValue="#{type.typeId}"/>
-                <f:ajax event="change" update="@this" />
             </h:selectOneMenu>
         </h:panelGrid>
         <h:panelGrid class="form-panel">
-            <h:commandButton class="submit-button" value="Buy ticket" action="#{parkometer.buyTicket}">
-                <f:ajax event="click" execute="@this" render="@form"/>
-            </h:commandButton>
+            <h:commandButton class="submit-button" value="Buy ticket" action="#{parkometer.buyTicket}"/>
         </h:panelGrid>
     </h:form>
 

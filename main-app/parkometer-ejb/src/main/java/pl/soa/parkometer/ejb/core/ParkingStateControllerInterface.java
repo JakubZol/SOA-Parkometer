@@ -21,5 +21,5 @@ public interface ParkingStateControllerInterface {
 
     public void resetTimer();
 
-    public void setTicketsQuery(List<Ticket> tickets);
+    public void setTicketsQueue(List<Ticket> tickets);
 }

@@ -57,7 +57,7 @@ public class Spot implements Serializable {
 
     @Basic
     @Column(name = "occupation_date", nullable = true)
-   // @XmlAttribute(name = "occupationDate")
+    @XmlElement(name = "occupationDate")
     public Timestamp getOccupationDate() {
         return occupationDate;
     }
