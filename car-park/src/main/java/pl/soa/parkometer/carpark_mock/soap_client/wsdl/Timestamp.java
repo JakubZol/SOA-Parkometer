@@ -31,6 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Timestamp {
 
+    public Timestamp(){};
+
     protected int nanos;
 
     /**

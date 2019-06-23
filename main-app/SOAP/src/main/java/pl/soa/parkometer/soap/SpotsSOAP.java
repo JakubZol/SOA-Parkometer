@@ -42,7 +42,8 @@ public class SpotsSOAP {
     public List<Spot> getAllOccupiedSpots(){ return spotManager.getAllOccupiedSpots();}
 
     @WebMethod(operationName = "updateSpot")
-    public void updateSpot(@WebParam(name = "Spot")Spot s) {
+    public void updateSpot(@WebParam(name = "Spot") Spot s) {
+        System.out.println("SPOT: " + s.getSpotName());
         if(s.isVacancy()){
             s.setOccupationDate(null);
             Ticket t = ticketManager.getActiveTicketBySpot(s.getSpotId());

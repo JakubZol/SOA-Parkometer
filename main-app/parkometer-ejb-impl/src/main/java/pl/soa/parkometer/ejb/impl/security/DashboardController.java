@@ -11,13 +11,17 @@ import pl.soa.parkometer.entities.Ticket;
 import pl.soa.parkometer.entities.User;
 
 import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
+import javax.security.auth.Subject;
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
 import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 
-@Stateless
+@Stateful
 public class DashboardController implements DashboardControllerInterface {
 
     @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/SpotManager")
@@ -31,6 +35,8 @@ public class DashboardController implements DashboardControllerInterface {
 
     @Resource
     SessionContext ctx;
+
+    private Subject subject = new Subject();
 
     @RolesAllowed({"Admin"})
     @Lock(LockType.READ)
@@ -60,9 +66,16 @@ public class DashboardController implements DashboardControllerInterface {
         return new LinkedList<>();
     }
 
+
     @RolesAllowed({"Admin", "Employee"})
     @Lock(LockType.READ)
     public List<Ticket> getTicketsBySpot(int spotId){
         return ticketManager.getTicketsBySpot(spotId);
     }
+
+    @PermitAll
+    public void logout(){
+        subject.getPrincipals().remove(ctx.getCallerPrincipal());
+    }
+
 }

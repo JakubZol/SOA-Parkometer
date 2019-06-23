@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/car-park" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/dashboard" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/database" />
+    <file type="web" url="file://$PROJECT_DIR$/main-app/jms" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/JMS-REST-API" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb" />
     <file type="web" url="file://$PROJECT_DIR$/main-app/parkometer-ejb-impl" />

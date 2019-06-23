@@ -9,6 +9,7 @@
         <module name="carpark" />
         <module name="dashboard" />
         <module name="database" />
+        <module name="JMS" />
         <module name="parkometer" />
         <module name="parkometerejb" />
         <module name="parkometerejbimpl" />

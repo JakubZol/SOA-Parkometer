@@ -3,8 +3,10 @@ package pl.soa.parkometer.ejb.impl.core;
 import pl.soa.parkometer.ejb.core.ParkingStateControllerInterface;
 import pl.soa.parkometer.ejb.database.SpotManagerInterface;
 import pl.soa.parkometer.ejb.database.TicketManagerInterface;
+import pl.soa.parkometer.ejb.jms.MessagePublisherInterface;
 import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.Ticket;
+import pl.soa.parkometer.jms.Notification;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
@@ -26,6 +28,9 @@ public class ParkingStateController implements ParkingStateControllerInterface {
     @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/TicketManager")
     TicketManagerInterface ticketManager;
 
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/MessagePublisher")
+    MessagePublisherInterface messagePublisher;
+
     private Set<Ticket> ticketsQueue = new HashSet<>();
     private Set<Spot> spotsQueue = new HashSet<>(); //tutaj później pobierać dane
 
@@ -41,13 +46,15 @@ public class ParkingStateController implements ParkingStateControllerInterface {
                 List<Ticket> delayed = ticketsQueue.stream().filter(ticket -> ticket.getExpiryDate().before(new Timestamp(new Date().getTime()))).collect(Collectors.toList());
 
                 for (Ticket t : delayed) {
-                    System.out.println("Ticket " + t.getTicketId() + " has expired!");
+                    //System.out.println("Ticket " + t.getTicketId() + " has expired!");
+                    messagePublisher.sendMessage(new Notification(t));
                     deleteTicket(t.getTicketId());
                 }
 
                 List<Spot> unpaid = spotsQueue.stream().filter(spot -> System.currentTimeMillis() - spot.getOccupationDate().getTime() > 300000).collect(Collectors.toList());
                 for (Spot s : unpaid) {
-                    System.out.println("Spot " + s.getSpotName() + " is occupied without ticket for at least 5 minutes!");
+                    //System.out.println("Spot " + s.getSpotName() + " is occupied without ticket for at least 5 minutes!");
+                    messagePublisher.sendMessage(new Notification(s));
                     deleteSpot(s.getSpotId());
                 }
             }

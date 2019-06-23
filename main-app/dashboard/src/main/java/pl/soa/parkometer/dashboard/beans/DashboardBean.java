@@ -1,10 +1,12 @@
 package pl.soa.parkometer.dashboard.beans;
 
 import pl.soa.parkometer.ejb.security.DashboardControllerInterface;
+import pl.soa.parkometer.ejb.security.NotificationsControllerInterface;
 import pl.soa.parkometer.ejb.security.UsersControllerInterface;
 import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.Ticket;
 import pl.soa.parkometer.entities.User;
+import pl.soa.parkometer.jms.Notification;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -25,6 +27,8 @@ public class DashboardBean implements Serializable {
     @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/DashboardController")
     DashboardControllerInterface dashboardController;
 
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/NotificationsController")
+    private NotificationsControllerInterface notificationsController;
 
     private String currentUserPassword;
     private String currentUserPasswordRepeated;
@@ -33,6 +37,11 @@ public class DashboardBean implements Serializable {
     private String currentUserLogin;
     private List<Ticket> tickets;
     private Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+    public String logout(){
+        dashboardController.logout();
+        return "login";
+    }
 
     public void setCurrentUserPassword(String currentUserPassword) {
         this.currentUserPassword = currentUserPassword;
@@ -115,6 +124,10 @@ public class DashboardBean implements Serializable {
         else{
             return "";
         }
+    }
+
+    public List<Notification> getNotifications(){
+        return notificationsController.getNotificationsForDashboard();
     }
 
     public List<Ticket> getTickets(){

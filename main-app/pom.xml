@@ -18,6 +18,8 @@
         <module>REST</module>
         <module>SOAP</module>
         <module>dashboard</module>
+        <module>JMS</module>
+        <module>jms</module>
     </modules>
 
     <properties>
