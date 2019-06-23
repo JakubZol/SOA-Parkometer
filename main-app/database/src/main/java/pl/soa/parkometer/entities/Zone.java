@@ -54,6 +54,7 @@ public class Zone implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "zone")
+    @XmlTransient
     public List<User> getUsers() {
         return users;
     }

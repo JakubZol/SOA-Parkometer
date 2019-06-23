@@ -3,31 +3,33 @@ package pl.soa.parkometer.carpark_mock.bean;
 
 import pl.soa.parkometer.carpark_mock.ZonesInitializer;
 import pl.soa.parkometer.carpark_mock.soap_client.SOAPClient;
-import pl.soa.parkometer.entities.Spot;
+import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Spot;
+import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Timestamp;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "carpark", eager = true)
 @ApplicationScoped
 public class CarParkMock {
 
-    private int currentSpotId;
-    private SOAPClient soapClient = new SOAPClient();
-    private List<Spot> spots = new ArrayList<>();//soapClient.getSpots();
+    private String currentSpotId;
     private Map<String, Vector<String>> zones = ZonesInitializer.initializeZones();
     private Set<String> zonesList = zones.keySet();
     private String currentZone = zonesList.iterator().next();
     private String currentLot = zones.get(currentZone).firstElement();
+    private List<Spot> spots = ZonesInitializer.getSpots();
 
     public List<Spot> getSpots() {
         return spots;
     }
 
-    public int getCurrentSpotId(){ return currentSpotId; };
+    public String getCurrentSpotId(){ return currentSpotId; };
 
-    public void setCurrentSpotId(int currentSpotId) {
+    public void setCurrentSpotId(String currentSpotId) {
         this.currentSpotId = currentSpotId;
     }
 
@@ -65,6 +67,20 @@ public class CarParkMock {
 
     public String getMessage(){
         return "Zajęte miejsce: " + currentLot;
+    }
+
+    public void takeSpot(){
+        int spotId = Integer.parseInt(currentSpotId);
+        Timestamp t = new Timestamp();
+        t.setNanos((int)System.currentTimeMillis() * 1000000);
+        System.out.println(t.getNanos());
+        System.out.println(System.currentTimeMillis() * 1000000);
+
+        /*List<Spot> spots = this.spots.stream().filter(spot -> spot.getSpotId() == spotId).collect(Collectors.toList());
+        if(spots.size() > 0){
+            Spot s = spots.get(0);
+            s.setIsVacancy(false);
+        }*/
     }
 
 

@@ -93,7 +93,8 @@ public class Spot implements Serializable {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
-    @XmlElement(name = "tickets")
+    //@XmlElement(name = "tickets")
+    @XmlTransient
     public List<Ticket> getTickets() {
         return tickets;
     }
