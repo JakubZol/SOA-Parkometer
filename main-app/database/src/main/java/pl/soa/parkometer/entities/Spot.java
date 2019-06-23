@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
-//select * from spot where vacancy = false and spot_id not in (select spot_id from ticket where expiry_date > NOW());
+
 @Entity
 @XmlRootElement(name = "spot")
 @NamedQuery(query = "Select s from Spot s where s.spotId not in (select t.spot.spotId from Ticket t where t.expiryDate > current_timestamp) and s.vacancy = false", name = "get occupied spots")
@@ -92,7 +92,7 @@ public class Spot implements Serializable {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "spot")
     //@XmlElement(name = "tickets")
     @XmlTransient
     public List<Ticket> getTickets() {

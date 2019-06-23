@@ -10,6 +10,7 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Stateless
@@ -28,6 +29,7 @@ public class SpotsSOAP {
 
     @WebMethod(operationName = "updateSpot")
     public void updateSpot(@WebParam(name = "Spot")Spot s) {
+        s.setOccupationDate(new Timestamp(System.currentTimeMillis()));
         spotManager.updateSpot(s);
     }
 

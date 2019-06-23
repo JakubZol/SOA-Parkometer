@@ -9,7 +9,6 @@
         <class>pl.soa.parkometer.entities.Spot</class>
         <class>pl.soa.parkometer.entities.Ticket</class>
         <class>pl.soa.parkometer.entities.TicketType</class>
-        <class>pl.soa.parkometer.entities.User</class>
         <class>pl.soa.parkometer.entities.Zone</class>
         <class>pl.soa.parkometer.entities.UserRoles</class>
         <class>pl.soa.parkometer.entities.User</class>
