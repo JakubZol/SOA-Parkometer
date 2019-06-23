@@ -2,81 +2,60 @@ package pl.soa.parkometer.carpark_mock.bean;
 
 
 import pl.soa.parkometer.carpark_mock.ZonesInitializer;
-import pl.soa.parkometer.carpark_mock.soap_client.SOAPClient;
 import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Spot;
-import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Timestamp;
-import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Zone;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "carpark", eager = true)
 @ApplicationScoped
 public class CarParkMock {
 
-    private String currentSpotId;
-    private Map<String, Vector<String>> zones = ZonesInitializer.initializeZones();
-    private Set<String> zonesList = zones.keySet();
-    private String currentZone = zonesList.iterator().next();
-    private String currentLot = zones.get(currentZone).firstElement();
-    private List<Spot> spots = ZonesInitializer.getSpots();
+    private String currentFreeSpotId;
+    private String currentOccupiedSpotId;
 
-    public List<Spot> getSpots() {
-        return spots;
+    public List<Spot> getFreeSpots() {
+        return ZonesInitializer.getSpots();
     }
 
-    public String getCurrentSpotId(){ return currentSpotId; };
-
-    public void setCurrentSpotId(String currentSpotId) {
-        this.currentSpotId = currentSpotId;
+    public List<Spot> getOccupiedSpots(){
+        return ZonesInitializer.getOccupiedSpots();
     }
 
-    public Set<String> getZonesList(){
-        return this.zonesList;
+    public String getCurrentOccupiedSpotId() {
+        return currentOccupiedSpotId;
     }
 
-    public Vector<String> getLots(){
-        return this.zones.get(currentZone);
+    public void setCurrentOccupiedSpotId(String currentOccupiedSpotId){
+        this.currentOccupiedSpotId = currentOccupiedSpotId;
     }
 
-    public String getCurrentLot() {
-        return currentLot;
-    }
+    public String getCurrentFreeSpotId(){ return currentFreeSpotId; };
 
-    public void setCurrentLot(String currentLot) {
-        this.currentLot = currentLot;
-    }
-
-    public Map<String, Vector<String>> getZones() {
-        return zones;
-    }
-
-    public String getCurrentZone() {
-        return currentZone;
-    }
-
-    public void setCurrentZone(String currentZone) {
-        this.currentZone = currentZone;
-    }
-
-    public void setZones(Map<String, Vector<String>> zones) {
-        this.zones = zones;
-    }
-
-    public String getMessage(){
-        return "Zajęte miejsce: " + currentLot;
+    public void setCurrentFreeSpotId(String currentSpotId) {
+        this.currentFreeSpotId = currentSpotId;
     }
 
     public void takeSpot(){
-        int spotId = Integer.parseInt(currentSpotId);
+        int spotId = Integer.parseInt(currentFreeSpotId);
 
-        List<Spot> spots = this.spots.stream().filter(spot -> spot.getSpotId() == spotId).collect(Collectors.toList());
+        List<Spot> spots = this.getFreeSpots().stream().filter(spot -> spot.getSpotId() == spotId).collect(Collectors.toList());
         if(spots.size() > 0){
             Spot s = spots.get(0);
             s.setIsVacancy(false);
+            ZonesInitializer.updateSpot(s);
+        }
+    }
+
+    public void leaveSpot(){
+        int spotId = Integer.parseInt(currentOccupiedSpotId);
+
+        List<Spot> spots = this.getOccupiedSpots().stream().filter(spot -> spot.getSpotId() == spotId).collect(Collectors.toList());
+        if(spots.size() > 0){
+            Spot s = spots.get(0);
+            s.setIsVacancy(true);
             ZonesInitializer.updateSpot(s);
         }
     }

@@ -9,17 +9,13 @@ import java.util.List;
 @Remote
 public interface ParkingStateControllerInterface {
 
-    public void updateTicketQueue(Ticket t);
-
-    public void updateSpotQueue(Spot s);
-
     public void deleteSpot(int id);
 
     public void deleteTicket(int id);
 
     public void sendMessage();
 
-    public void resetTimer();
-
     public void setTicketsQueue(List<Ticket> tickets);
+
+    public void setSpotsQueue(List<Spot> spots);
 }

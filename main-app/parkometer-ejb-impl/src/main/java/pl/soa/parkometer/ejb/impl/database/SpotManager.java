@@ -55,6 +55,11 @@ public class SpotManager implements SpotManagerInterface {
         return query.getResultList();
     }
 
+    public List<Spot> getAllOccupiedSpots(){
+        TypedQuery<Spot> typedQuery = entityManager.createQuery("select s from  Spot s where s.vacancy = false", Spot.class);
+        return typedQuery.getResultList();
+    }
+
     public List<Spot> getSpotsByZone(int zoneId){
 
         TypedQuery<Spot> typedQuery = entityManager.createQuery("select s from  Spot s where s.zone.zoneId = :id", Spot.class);

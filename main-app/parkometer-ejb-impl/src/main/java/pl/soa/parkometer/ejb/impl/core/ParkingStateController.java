@@ -1,8 +1,8 @@
 package pl.soa.parkometer.ejb.impl.core;
 
 import pl.soa.parkometer.ejb.core.ParkingStateControllerInterface;
+import pl.soa.parkometer.ejb.database.SpotManagerInterface;
 import pl.soa.parkometer.ejb.database.TicketManagerInterface;
-import pl.soa.parkometer.ejb.impl.database.TicketManager;
 import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.Ticket;
 
@@ -20,49 +20,42 @@ import java.util.stream.Collectors;
 @Singleton
 public class ParkingStateController implements ParkingStateControllerInterface {
 
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/SpotManager")
+    SpotManagerInterface spotManager;
+
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/TicketManager")
+    TicketManagerInterface ticketManager;
 
     private Set<Ticket> ticketsQueue = new HashSet<>();
-    private List<Spot> spotsQuery = new LinkedList<>(); //tutaj później pobierać dane
+    private Set<Spot> spotsQueue = new HashSet<>(); //tutaj później pobierać dane
 
 
     @PostConstruct
     public void initialize() {
-        System.out.println("Hello!");
+        ticketsQueue.addAll(ticketManager.getActiveTickets());
+        spotsQueue.addAll(spotManager.getOccupiedSpots());
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Run!!");
                 List<Ticket> delayed = ticketsQueue.stream().filter(ticket -> ticket.getExpiryDate().before(new Timestamp(new Date().getTime()))).collect(Collectors.toList());
+
                 for (Ticket t : delayed) {
                     System.out.println("Ticket " + t.getTicketId() + " has expired!");
                     deleteTicket(t.getTicketId());
+                }
+
+                List<Spot> unpaid = spotsQueue.stream().filter(spot -> System.currentTimeMillis() - spot.getOccupationDate().getTime() > 300000).collect(Collectors.toList());
+                for (Spot s : unpaid) {
+                    System.out.println("Spot " + s.getSpotName() + " is occupied without ticket for at least 5 minutes!");
+                    deleteSpot(s.getSpotId());
                 }
             }
         }, 0, 180, TimeUnit.SECONDS);
     }
 
-    public void updateTicketQueue(Ticket t){
-        System.out.println("Adding ticket...");
-        if(!this.ticketsQueue.contains(t)) {
-            this.ticketsQueue.add(t);
-            //this.ticketsQueue.sort(Comparator.comparing(Ticket::getExpiryDate).reversed());
-            System.out.println(t.getTicketId() + " added!");
-        }
-        else{
-            System.out.println("Nope!");
-        }
-
-    }
-
-    public void updateSpotQueue(Spot s){
-        this.spotsQuery.add(s);
-        this.spotsQuery.sort(Comparator.comparing(Spot::getOccupationDate).reversed());
-
-    }
-
     public void deleteSpot(int id){
-        this.spotsQuery = this.spotsQuery.stream().filter(spot -> spot.getSpotId() != id).collect(Collectors.toList());
+        this.spotsQueue = this.spotsQueue.stream().filter(spot -> spot.getSpotId() != id).collect(Collectors.toSet());
     }
 
     public void deleteTicket(int id){
@@ -72,13 +65,16 @@ public class ParkingStateController implements ParkingStateControllerInterface {
     @Lock(LockType.WRITE)
     public void setTicketsQueue(List<Ticket> tickets){
         ticketsQueue.addAll(tickets);
-        System.out.println(ticketsQueue.size());
+    }
+
+    @Lock(LockType.WRITE)
+    public void setSpotsQueue(List<Spot> spots){
+        spotsQueue.addAll(spots);
+
     }
 
     public void sendMessage() { //TO DO
     }
 
-    public void resetTimer(){ //TO DO
-    }
 
 }

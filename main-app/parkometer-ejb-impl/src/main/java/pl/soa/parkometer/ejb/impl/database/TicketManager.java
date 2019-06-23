@@ -7,6 +7,7 @@ import pl.soa.parkometer.entities.TicketType;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -32,7 +33,21 @@ public class TicketManager implements TicketManagerInterface {
 
     }
 
-    public void updateTicket(Ticket s){ System.out.println("TO DO!"); }
+    public Ticket getActiveTicketBySpot(int spotId){
+        try {
+            TypedQuery<Ticket> typedQuery = entityManager.createQuery("select t from Ticket t where t.spot.spotId = :spotId and t.expiryDate > current_timestamp", Ticket.class);
+            return typedQuery.setParameter("spotId", spotId).getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public void updateTicket(Ticket t){
+        entityManager.getTransaction().begin();
+        entityManager.merge(t);
+        entityManager.getTransaction().commit();
+    }
 
     public void deleteTicket(int id){
         entityManager.getTransaction().begin();

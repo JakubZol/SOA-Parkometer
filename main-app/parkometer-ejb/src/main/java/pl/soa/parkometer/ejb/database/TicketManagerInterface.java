@@ -5,6 +5,7 @@ import pl.soa.parkometer.entities.TicketType;
 
 import javax.ejb.Local;
 import javax.ejb.Remote;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Remote
@@ -25,4 +26,6 @@ public interface TicketManagerInterface {
     public List<Ticket> getActiveTickets();
 
     public List<Ticket> getTicketsBySpot(int spotId);
+
+    public Ticket getActiveTicketBySpot(int spotId) throws NoResultException;
 }

@@ -2,7 +2,6 @@ package pl.soa.parkometer.carpark_mock.soap_client;
 
 
 import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Spot;
-import pl.soa.parkometer.carpark_mock.soap_client.wsdl.SpotArray;
 import pl.soa.parkometer.carpark_mock.soap_client.wsdl.SpotsSOAPService;
 
 import java.net.MalformedURLException;
@@ -30,6 +29,10 @@ public class SOAPClient {
 
     public void updateSpot(Spot spot){
         spotsSOAPService.getSpotService().updateSpot(spot);
+    }
+
+    public List<Spot> getOccupiedSpots(){
+        return spotsSOAPService.getSpotService().getAllOccupiedSpots().getItem();
     }
 
 }

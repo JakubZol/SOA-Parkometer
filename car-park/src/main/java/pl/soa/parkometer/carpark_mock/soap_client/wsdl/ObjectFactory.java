@@ -25,23 +25,13 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Spot_QNAME = new QName("http://soap.parkometer.soa.pl/", "spot");
-    private final static QName _Ticket_QNAME = new QName("http://soap.parkometer.soa.pl/", "ticket");
     private final static QName _Zone_QNAME = new QName("http://soap.parkometer.soa.pl/", "zone");
-    private final static QName _TicketType_QNAME = new QName("http://soap.parkometer.soa.pl/", "ticketType");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: pl.soa.parkometer.soap
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Ticket }
-     * 
-     */
-    public Ticket createTicket() {
-        return new Ticket();
     }
 
     /**
@@ -61,27 +51,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TicketType }
-     * 
-     */
-    public TicketType createTicketType() {
-        return new TicketType();
-    }
-
-    /**
      * Create an instance of {@link SpotArray }
      * 
      */
     public SpotArray createSpotArray() {
         return new SpotArray();
-    }
-
-    /**
-     * Create an instance of {@link User }
-     * 
-     */
-    public User createUser() {
-        return new User();
     }
 
     /**
@@ -102,30 +76,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Ticket }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://soap.parkometer.soa.pl/", name = "ticket")
-    public JAXBElement<Ticket> createTicket(Ticket value) {
-        return new JAXBElement<Ticket>(_Ticket_QNAME, Ticket.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Zone }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://soap.parkometer.soa.pl/", name = "zone")
     public JAXBElement<Zone> createZone(Zone value) {
         return new JAXBElement<Zone>(_Zone_QNAME, Zone.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TicketType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://soap.parkometer.soa.pl/", name = "ticketType")
-    public JAXBElement<TicketType> createTicketType(TicketType value) {
-        return new JAXBElement<TicketType>(_TicketType_QNAME, TicketType.class, null, value);
     }
 
 }

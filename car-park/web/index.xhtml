@@ -28,33 +28,27 @@
 <h:body>
     <h1>Welcome to car park!</h1>
     <h:form>
+        hello
         <h:panelGrid class="selection-panel">
             <h3>Select Parking Spot:</h3>
-            <h:selectOneMenu value="#{carpark.currentSpotId}" id="spots">
-                <f:selectItems var="spot" value="#{carpark.spots}" itemLabel="#{spot.spotName} | #{spot.zone.zoneName}" itemValue="#{spot.spotId}"/>
+            <h:selectOneMenu value="#{carpark.currentFreeSpotId}" id="free-spots">
+                <f:selectItems var="spot" value="#{carpark.freeSpots}" itemLabel="#{spot.spotName} | #{spot.zone.zoneName}" itemValue="#{spot.spotId}"/>
             </h:selectOneMenu>
         </h:panelGrid>
-        <!--<h:panelGrid class="selection-panel">
-            <h3>Select Zone:</h3>
-            <h:selectOneMenu value="#{carpark.currentZone}" id="zones">
-                <f:selectItems var="zone" value="#{carpark.zonesList}" itemLabel="#{zone}" itemValue="#{zone}"/>
-            </h:selectOneMenu>
-            <h:commandButton value="Wybierz strefę">
-                <f:ajax execute="zones" render="lots"/>
-            </h:commandButton>
+
+        <h:panelGrid class="summary">
+            <h:commandButton value="Take Spot" action="#{carpark.takeSpot()}"/>
         </h:panelGrid>
 
         <h:panelGrid class="selection-panel">
-            <h3>Select Parking Lot:</h3>
-            <h:selectOneMenu value="#{carpark.currentLot}" id="lots">
-                <f:selectItems var="lot" value="#{carpark.lots}" itemLabel="#{lot}" itemValue="#{lot}"/>
+            <h3>Select Parking Spot:</h3>
+            <h:selectOneMenu value="#{carpark.currentOccupiedSpotId}" id="occupied-spots">
+                <f:selectItems var="spot" value="#{carpark.occupiedSpots}" itemLabel="#{spot.spotName} | #{spot.zone.zoneName}" itemValue="#{spot.spotId}"/>
             </h:selectOneMenu>
-            <h:commandButton value="Wybierz miejsce">
-                <f:ajax execute="lots" render="lot"/>
-            </h:commandButton>
-        </h:panelGrid>-->
+        </h:panelGrid>
+
         <h:panelGrid class="summary">
-            <h:commandButton value="Take Spot" action="#{carpark.takeSpot()}"/>
+            <h:commandButton value="Leave Spot" action="#{carpark.leaveSpot()}"/>
         </h:panelGrid>
     </h:form>
 </h:body>

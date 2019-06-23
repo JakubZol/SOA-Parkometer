@@ -34,6 +34,15 @@ public interface SpotService {
 
     /**
      * 
+     * @return
+     *     returns SpotArray
+     */
+    @WebMethod
+    @WebResult(name = "getAllOccupiedSpotsResponse", partName = "getAllOccupiedSpotsResponse")
+    public SpotArray getAllOccupiedSpots();
+
+    /**
+     * 
      * @param spot
      */
     @WebMethod
