@@ -17,10 +17,17 @@
         a{
             font-size: 20px;
         }
+        .invisible{
+            display: none;
+        }
+        .visible{
+            display:block;
+        }
     </style>
 </h:head>
 <h:body>
-    <h:form>
+    <h2 class="#{dashboard.notifications.size() > 0 ? 'invisible' : 'visible'}">You dont have any new notification.</h2>
+    <h:form class="#{dashboard.notifications.size() > 0 ? 'visible' : 'invisible'}">
         <h2>Notifications</h2>
         <h:dataTable value="#{dashboard.notifications}" var="notification" border="2"
                      cellspacing="1" cellpadding="1">
