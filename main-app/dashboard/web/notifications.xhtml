@@ -42,6 +42,11 @@
                #{notification.zone.zoneName}
             </h:column>
 
+            <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton action="#{dashboard.deleteNotification(notification)}" value="Delete notification"/>
+            </h:column>
+
 
         </h:dataTable>
     </h:form>

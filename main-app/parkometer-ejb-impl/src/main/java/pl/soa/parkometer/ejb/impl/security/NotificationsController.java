@@ -58,4 +58,11 @@ public class NotificationsController implements NotificationsControllerInterface
 
     }
 
+    @PermitAll
+    public void deleteNotification(Notification n){
+        if(ctx.isCallerInRole("Admin")){
+            this.notifications.remove(n);
+        }
+    }
+
 }

@@ -145,4 +145,8 @@ public class DashboardBean implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public void deleteNotification(Notification n){
+        notificationsController.deleteNotification(n);
+    }
 }
