@@ -30,6 +30,10 @@
             height: 50px;
             box-sizing: border-box;
         }
+        a{
+            display: block;
+            margin-top: 20px;
+        }
     </style>
 </h:head>
 <h:body>
@@ -46,13 +50,13 @@
         <h:panelGrid class="form-panel">
             <h4>Chose ticket</h4>
             <h:selectOneMenu value="#{parkometer.currentTypeId}" id="time">
-                <f:selectItems var="type" value="#{parkometer.ticketTypes}" itemLabel="#{parkometer.transformTime(type.time)} | #{type.price} zł" itemValue="#{type.typeId}"/>
+                <f:selectItems var="type" value="#{parkometer.ticketTypes}" itemLabel="#{parkometer.minutesToTimeString(type.time)} | #{type.price} zł" itemValue="#{type.typeId}"/>
             </h:selectOneMenu>
         </h:panelGrid>
         <h:panelGrid class="form-panel">
             <h:commandButton class="submit-button" value="Buy ticket" action="#{parkometer.buyTicket}"/>
         </h:panelGrid>
     </h:form>
-
+    <a href="http://localhost:8080/carpark/index.xhtml">Go back to the car park >></a>
 </h:body>
 </html>

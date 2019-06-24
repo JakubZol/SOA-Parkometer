@@ -2,11 +2,9 @@ package pl.soa.parkometer.parkometer_mock.beans;
 
 import pl.soa.parkometer.entities.Spot;
 import pl.soa.parkometer.entities.TicketType;
-import pl.soa.parkometer.parkometer_mock.data.DataFetcher;
+import pl.soa.parkometer.parkometer_mock.data.DataRESTInitializer;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 import java.io.Serializable;
@@ -20,8 +18,8 @@ public class ParkometerMock implements Serializable {
 
     private String currentSpotId;
     private String currentTypeId;
-    private List<Spot> spots = DataFetcher.getSpots();
-    private List<TicketType> ticketTypes = DataFetcher.getTicketTypes();
+    private List<Spot> spots = DataRESTInitializer.getSpots();
+    private List<TicketType> ticketTypes = DataRESTInitializer.getTicketTypes();
 
     public List<Spot> getSpots(){
         return this.spots;
@@ -31,14 +29,13 @@ public class ParkometerMock implements Serializable {
         return ticketTypes;
     }
 
-    public String transformTime(int minutes){
+    public String minutesToTimeString(int minutes){
         if(minutes >= 1440){
-            String rest = minutes % (24 * 60) == 0 ? "" : minutes % (24 * 60) + "minute(s)";
-            return Math.floor(minutes / (24 * 60)) + " day(s)";
+            return Math.floor((float)minutes / (24 * 60)) + " day(s)";
         }
         else if(minutes >= 60){
             String rest = minutes % 60 == 0 ? "" : minutes % 60 + "minute(s)";
-            return Math.floor(minutes / 60) + " hour(s)" + rest;
+            return Math.floor((float)minutes / 60) + " hour(s)" + rest;
         }
         else return minutes + " minutes";
     }
@@ -71,7 +68,7 @@ public class ParkometerMock implements Serializable {
             List<TicketType> finalTypes = this.ticketTypes.stream().filter(spot -> spot.getTypeId() == typeId).collect(Collectors.toList());
             TicketType currentType = finalTypes.get(0);
 
-            DataFetcher.sendTicket(currentSpot, currentType);
+            DataRESTInitializer.sendTicket(currentSpot, currentType);
         }
     }
 
