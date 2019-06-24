@@ -50,7 +50,7 @@ public class ParkingStateController implements ParkingStateControllerInterface {
                     deleteTicket(t.getTicketId());
                 }
 
-                List<Spot> unpaid = spotsQueue.stream().filter(spot -> System.currentTimeMillis() - spot.getOccupationDate().getTime() > 300000).collect(Collectors.toList());
+                List<Spot> unpaid = spotsQueue.stream().filter(spot -> System.currentTimeMillis() - spot.getOccupationDate().getTime() > 600000).collect(Collectors.toList());
                 for (Spot s : unpaid) {
                     messagePublisher.sendMessage(new Notification(s));
                     deleteSpot(s.getSpotId());

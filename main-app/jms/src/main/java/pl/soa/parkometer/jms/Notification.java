@@ -45,7 +45,7 @@ public class Notification implements Serializable {
 
     public String getMessagge(){
         if(spot != null){
-            return "Spot " + spot.getSpotName() + ", " + zone.getZoneName() + " is occupied without a ticket for at least 5 minutes!";
+            return "Spot " + spot.getSpotName() + ", " + zone.getZoneName() + " is occupied without a ticket for at least 10 minutes!";
         }
         else if(ticket != null){
             return "Ticket " + ticket.getTicketId() + " for spot " + ticket.getSpot().getSpotName() + ", " + zone.getZoneName() + " has expired at " + ticket.getExpiryDate() + ".";
