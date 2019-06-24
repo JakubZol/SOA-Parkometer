@@ -1,5 +1,5 @@
 package pl.soa.parkometer.ejb.impl.jms;
-import pl.soa.parkometer.ejb.jms.MessagePublisherInterface;
+import pl.soa.parkometer.ejb.jms.MessageServiceInterface;
 import pl.soa.parkometer.jms.Notification;
 
 import javax.annotation.Resource;
@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.jms.*;
 
 @Stateless
-public class MessagePublisher implements MessagePublisherInterface {
+public class MessageService implements MessageServiceInterface {
 
     @Resource(mappedName = "java:/ConnectionFactory")
     private ConnectionFactory cf;

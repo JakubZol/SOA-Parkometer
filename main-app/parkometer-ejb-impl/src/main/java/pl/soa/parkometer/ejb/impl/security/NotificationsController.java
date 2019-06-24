@@ -9,9 +9,7 @@ import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
-import java.security.Principal;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +39,6 @@ public class NotificationsController implements NotificationsControllerInterface
     @RolesAllowed({"Admin", "Employee"})
     @Override
     public List<Notification> getNotificationsForDashboard() {
-        Principal principal = ctx.getCallerPrincipal();
         if(ctx.isCallerInRole("Admin")){
             return this.getAllNotifications();
         }

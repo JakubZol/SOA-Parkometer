@@ -1,6 +1,5 @@
 package pl.soa.parkometer.ejb.impl.security;
 
-import org.jboss.security.Base64Utils;
 import org.jboss.util.Base64;
 import pl.soa.parkometer.ejb.database.UserManagerInterface;
 import pl.soa.parkometer.ejb.security.UsersControllerInterface;
@@ -66,7 +65,7 @@ public class UserController implements UsersControllerInterface {
     }
 
     private String MD5encoding(String passwd) throws NoSuchAlgorithmException{
-        MessageDigest md = null;
+        MessageDigest md;
         md = MessageDigest.getInstance("MD5");
         byte[] passwordBytes = passwd.getBytes();
         byte[] hash = md.digest(passwordBytes);

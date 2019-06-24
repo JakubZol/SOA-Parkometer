@@ -1,6 +1,6 @@
 package pl.soa.parkometer.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
@@ -80,7 +80,7 @@ public class Ticket implements Serializable {
         return result;
     }
 
-    //@JsonIgnore
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
     @XmlElement(name = "ticketType")
@@ -92,7 +92,7 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
-    //@JsonIgnore
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     @XmlElement(name = "spot")
