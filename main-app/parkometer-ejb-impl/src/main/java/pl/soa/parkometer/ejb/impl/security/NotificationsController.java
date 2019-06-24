@@ -58,5 +58,7 @@ public class NotificationsController implements NotificationsControllerInterface
     @PermitAll
     public void addNotification(Notification n){
         this.notifications.add(n);
+
     }
+
 }
