@@ -16,6 +16,7 @@ public interface NotificationsControllerInterface {
 
     public void addNotification(Notification n);
 
+    public void deleteNotification(Notification n);
 
 
 }

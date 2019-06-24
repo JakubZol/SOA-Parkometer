@@ -1,6 +1,7 @@
 package pl.soa.parkometer.rest;
 
 import pl.soa.parkometer.ejb.core.ParkingStateControllerInterface;
+import pl.soa.parkometer.ejb.database.SpotManagerInterface;
 import pl.soa.parkometer.ejb.database.TicketManagerInterface;
 import pl.soa.parkometer.entities.Ticket;
 
@@ -21,6 +22,9 @@ public class TicketsController {
     @EJB(lookup= "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/ParkingStateController")
     ParkingStateControllerInterface parkingStateController;
 
+    @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/SpotManager")
+    SpotManagerInterface spotManager;
+
     @GET
     @Path("tickets")
     public Response getTicketTypes() {
@@ -33,6 +37,7 @@ public class TicketsController {
     public void createTicket(Ticket t){
         this.ticketManager.createTicket(t);
         parkingStateController.setTicketsQueue(this.ticketManager.getActiveTickets());
+        parkingStateController.setSpotsQueue(this.spotManager.getOccupiedSpots());
     }
 
 }

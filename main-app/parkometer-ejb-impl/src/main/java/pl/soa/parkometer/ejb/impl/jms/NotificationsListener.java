@@ -1,7 +1,5 @@
 package pl.soa.parkometer.ejb.impl.jms;
 
-
-
 import pl.soa.parkometer.ejb.jms.NotificationsListenerInterface;
 import pl.soa.parkometer.ejb.security.NotificationsControllerInterface;
 import pl.soa.parkometer.jms.Notification;
@@ -14,7 +12,7 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
 
-@MessageDriven(messageListenerInterface=MessageListener.class, activationConfig = {
+@MessageDriven(messageListenerInterface = MessageListener.class, activationConfig = {
         @ActivationConfigProperty(
                 propertyName = "destination",
                 propertyValue = "java:/jms/queue/SOA_Parkometer"),
@@ -33,7 +31,6 @@ public class NotificationsListener implements MessageListener, NotificationsList
         ObjectMessage objectMessage = (ObjectMessage) message;
         try{
             Notification notification = (Notification) objectMessage.getObject();
-            System.out.println("Message: " + notification.getMessagge());
             notificationsController.addNotification(notification);
         }
         catch (Exception e){

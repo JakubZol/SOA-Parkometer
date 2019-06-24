@@ -6,7 +6,7 @@ import pl.soa.parkometer.jms.Notification;
 import javax.ejb.Remote;
 
 @Remote
-public interface MessagePublisherInterface {
+public interface MessageServiceInterface {
 
     public void sendMessage(Notification notification);
 }

@@ -17,6 +17,4 @@ public interface DashboardControllerInterface {
 
     public List<Ticket> getTicketsBySpot(int spotId);
 
-    public void logout();
-
 }

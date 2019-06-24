@@ -93,7 +93,6 @@ public class Spot implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "spot")
-    //@XmlElement(name = "tickets")
     @XmlTransient
     public List<Ticket> getTickets() {
         return tickets;
@@ -103,7 +102,7 @@ public class Spot implements Serializable {
         this.tickets = tickets;
     }
 
-    //@JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "zone_id", referencedColumnName = "zone_id", nullable = false)
     @XmlElement(name = "zone")

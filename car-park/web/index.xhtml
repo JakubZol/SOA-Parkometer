@@ -22,13 +22,16 @@
         .summary{
             margin: 20px auto;
         }
+        a{
+            display: block;
+            margin-top: 20px;
+        }
     </style>
 </h:head>
 
 <h:body>
     <h1>Welcome to car park!</h1>
     <h:form>
-        hello
         <h:panelGrid class="selection-panel">
             <h3>Select Parking Spot:</h3>
             <h:selectOneMenu value="#{carpark.currentFreeSpotId}" id="free-spots">
@@ -51,6 +54,7 @@
             <h:commandButton value="Leave Spot" action="#{carpark.leaveSpot()}"/>
         </h:panelGrid>
     </h:form>
+    <a href="http://localhost:8080/parkometer/index.xhtml">Go to the parkometer >></a>
 </h:body>
 
 

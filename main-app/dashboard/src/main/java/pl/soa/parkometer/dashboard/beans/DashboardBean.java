@@ -40,15 +40,6 @@ public class DashboardBean implements Serializable {
     private List<Ticket> tickets;
     private Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
-    public void logout(){
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().invalidateSession();
-        try {
-            context.getExternalContext().redirect("index.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void setCurrentUserPassword(String currentUserPassword) {
         this.currentUserPassword = currentUserPassword;
@@ -143,5 +134,19 @@ public class DashboardBean implements Serializable {
 
     public Timestamp getCurrentTimestamp() {
         return currentTimestamp;
+    }
+
+    public void logout(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().invalidateSession();
+        try {
+            context.getExternalContext().redirect("index.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteNotification(Notification n){
+        notificationsController.deleteNotification(n);
     }
 }

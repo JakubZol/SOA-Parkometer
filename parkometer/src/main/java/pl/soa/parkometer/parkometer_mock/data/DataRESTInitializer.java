@@ -14,14 +14,14 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DataFetcher {
+public class DataRESTInitializer {
 
     public static List<Spot> getSpots(){
         Client client = ClientBuilder.newClient();
         Response response = client.target("http://localhost:8080/REST-1.0-SNAPSHOT/spots").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
 
         if (response.getStatus()!= 200){
-            return new LinkedList<Spot>();
+            return new LinkedList<>();
         }
 
         return response.readEntity(new GenericType<List<Spot>>(){});
@@ -32,7 +32,7 @@ public class DataFetcher {
         Response response = client.target("http://localhost:8080/REST-1.0-SNAPSHOT/tickets").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
 
         if (response.getStatus()!= 200){
-            return new LinkedList<TicketType>();
+            return new LinkedList<>();
         }
 
         return response.readEntity(new GenericType<List<TicketType>>(){});

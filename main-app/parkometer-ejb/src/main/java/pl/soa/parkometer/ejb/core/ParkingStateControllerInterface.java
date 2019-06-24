@@ -13,8 +13,6 @@ public interface ParkingStateControllerInterface {
 
     public void deleteTicket(int id);
 
-    public void sendMessage();
-
     public void setTicketsQueue(List<Ticket> tickets);
 
     public void setSpotsQueue(List<Spot> spots);

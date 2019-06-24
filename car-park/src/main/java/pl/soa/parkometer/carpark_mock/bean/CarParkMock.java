@@ -1,27 +1,27 @@
 package pl.soa.parkometer.carpark_mock.bean;
 
 
-import pl.soa.parkometer.carpark_mock.ZonesInitializer;
+import pl.soa.parkometer.carpark_mock.SpotsInitializer;
 import pl.soa.parkometer.carpark_mock.soap_client.wsdl.Spot;
 
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "carpark", eager = true)
-@ApplicationScoped
+@RequestScoped
 public class CarParkMock {
 
     private String currentFreeSpotId;
     private String currentOccupiedSpotId;
 
     public List<Spot> getFreeSpots() {
-        return ZonesInitializer.getSpots();
+        return SpotsInitializer.getSpots();
     }
 
     public List<Spot> getOccupiedSpots(){
-        return ZonesInitializer.getOccupiedSpots();
+        return SpotsInitializer.getOccupiedSpots();
     }
 
     public String getCurrentOccupiedSpotId() {
@@ -45,7 +45,7 @@ public class CarParkMock {
         if(spots.size() > 0){
             Spot s = spots.get(0);
             s.setIsVacancy(false);
-            ZonesInitializer.updateSpot(s);
+            SpotsInitializer.updateSpot(s);
         }
     }
 
@@ -57,7 +57,7 @@ public class CarParkMock {
             Spot s = spots.get(0);
             s.setIsVacancy(true);
             s.setOccupationDate(null);
-            ZonesInitializer.updateSpot(s);
+            SpotsInitializer.updateSpot(s);
         }
     }
 
