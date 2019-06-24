@@ -30,15 +30,18 @@ public class SpotsSOAP {
     @EJB(lookup = "java:global/parkometer-ejb-impl-1.0-SNAPSHOT/TicketManager")
     TicketManagerInterface ticketManager;
 
+
     @WebMethod(operationName = "getFreeSpots")
     @WebResult(name = "getFreeSpotsResponse")
     public List<Spot> getFreeSpots(){
         return spotManager.getFreeSpots();
     }
 
+
     @WebMethod(operationName = "getAllOccupiedSpots")
     @WebResult(name = "getAllOccupiedSpotsResponse")
     public List<Spot> getAllOccupiedSpots(){ return spotManager.getAllOccupiedSpots();}
+
 
     @WebMethod(operationName = "updateSpot")
     public void updateSpot(@WebParam(name = "Spot") Spot s) {
