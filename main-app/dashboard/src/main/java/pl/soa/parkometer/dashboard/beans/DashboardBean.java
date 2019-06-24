@@ -11,6 +11,8 @@ import pl.soa.parkometer.jms.Notification;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Comparator;
@@ -38,9 +40,14 @@ public class DashboardBean implements Serializable {
     private List<Ticket> tickets;
     private Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
-    public String logout(){
-        dashboardController.logout();
-        return "login";
+    public void logout(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().invalidateSession();
+        try {
+            context.getExternalContext().redirect("index.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setCurrentUserPassword(String currentUserPassword) {

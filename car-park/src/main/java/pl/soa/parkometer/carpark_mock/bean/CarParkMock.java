@@ -56,6 +56,7 @@ public class CarParkMock {
         if(spots.size() > 0){
             Spot s = spots.get(0);
             s.setIsVacancy(true);
+            s.setOccupationDate(null);
             ZonesInitializer.updateSpot(s);
         }
     }

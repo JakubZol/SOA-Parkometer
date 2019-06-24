@@ -13,7 +13,6 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
-import javax.persistence.NoResultException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -43,9 +42,7 @@ public class SpotsSOAP {
 
     @WebMethod(operationName = "updateSpot")
     public void updateSpot(@WebParam(name = "Spot") Spot s) {
-        System.out.println("SPOT: " + s.getSpotName());
         if(s.isVacancy()){
-            s.setOccupationDate(null);
             Ticket t = ticketManager.getActiveTicketBySpot(s.getSpotId());
             if(t != null) {
                 t.setExpiryDate(new Timestamp(System.currentTimeMillis()));

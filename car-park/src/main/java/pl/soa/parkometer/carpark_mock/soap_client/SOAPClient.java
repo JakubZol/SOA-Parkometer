@@ -12,7 +12,7 @@ public class SOAPClient {
 
     private SpotsSOAPService spotsSOAPService;
 
-    //"http://http://localhost:8080/SOAP-1.0-SNAPSHOT/SpotService?wsdl"
+
     public SOAPClient(String serviceUrl){
         try {
             URL url = new URL(serviceUrl);
